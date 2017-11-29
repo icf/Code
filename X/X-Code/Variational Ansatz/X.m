@@ -1,5 +1,5 @@
 %% system parameters:
-Lx=6;
+Lx=2;
 Ly=1;
 Lz=1;
 
