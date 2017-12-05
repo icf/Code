@@ -1,6 +1,6 @@
 %% system parameters:
-Lx=2;
-Ly=[2:2:20];
+Lx=4;
+Ly=[4:2:4];
 Lz=1;
 
 kx=0;
@@ -11,10 +11,10 @@ tx=1;
 ty=1;
 tz=1;
 
-N_up=Lx.*Ly./2; 
-N_dn=Lx.*Ly./2;
+N_up=7; 
+N_dn=7;
 
-U=4;
+U=8;
 
 %% running parameters:
 N_y=4;                % Number of y (Hidden Field).

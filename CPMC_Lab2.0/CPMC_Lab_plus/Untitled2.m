@@ -50,7 +50,29 @@
 % xlabel ('N_wlk');
 % ylabel ('E_V_BP_ave-E_V_ED_mixed');
 
-x1=bitget(uint8(3),4:-1:1)
+% x1=bitget(uint8(3),4:-1:1)
+% E_mean1=mean(E_ave1(1:7));
+% E_mean2=mean(E_ave2(1:7));
+% E_BP_mean1=mean(E_BP_ave1(1:7));
+% E_BP_mean2=mean(E_BP_ave2(1:7));
+
+x=1:7;
+
+figure;
+errorbar(x,E_ave1(x),E_err1(x),'DisplayName','E\_CPMC');
+
+hold on
+errorbar(x,E_BP_ave1(x),E_BP_err1(x),'DisplayName','E\_CPMC\_BP');
+
+hold on
+errorbar(x,E_ave2(x),E_err2(x),'DisplayName','E\_CPMC\_X');
+
+hold on
+errorbar(x,E_BP_ave2(x),E_BP_err2(x),'DisplayName','E\_CPMC\_BP\_X');
+
+ylabel ('E');
+
+save ('myFile.mat');
 
 
 

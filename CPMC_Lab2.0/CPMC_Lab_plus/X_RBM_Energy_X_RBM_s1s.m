@@ -1,4 +1,4 @@
-function [E,E_ED,E_real,N]=Energy_X_RBM3_2(a,w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k)
+function [E,E_ED,E_real,N,S1S]=X_RBM_Energy_X_RBM_s1s(a,w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k)
 %% Initialization
 E=0;
 RE=0;
@@ -10,6 +10,7 @@ E_real=0;
 RE_real=0;
 
 N=0;
+S1S=0;
 
 n_phi=0;
 
@@ -29,37 +30,12 @@ N_par=N_up+N_dn;
              eN_dn(i,i)=exp(-1*temp_T(i,1));
          end  
          
-%          [psi_nonint,E_nonint_m] = eig(H_k);
-%          Phi_T1=horzcat(psi_nonint(:,1:N_up),psi_nonint(:,1:N_dn)); %Trivial K State.
-%          phi_1(:,:,1)=Phi_T1;
-%          
-%          Phi_T2=horzcat(psi_nonint(:,1:N_up-1),psi_nonint(:,N_up+1),psi_nonint(:,1:N_dn)); %Trivial K State.
-%          phi_1(:,:,2)=Phi_T2;
-%       
-%          Phi_T3=horzcat(psi_nonint(:,1:N_up),psi_nonint(:,1:N_dn-1),psi_nonint(:,N_dn+1)); %Trivial K State.
-%          phi_1(:,:,3)=Phi_T3;
-%    
-%          Phi_T4=horzcat(psi_nonint(:,1:N_up-1),psi_nonint(:,N_up+1),psi_nonint(:,1:N_dn-1),psi_nonint(:,N_dn+1)); %Trivial K State.
-%          phi_1(:,:,4)=Phi_T4;
-%          
-%          Phi_T5=horzcat(psi_nonint(:,1:N_up-2),psi_nonint(:,N_up+1:N_up+2),psi_nonint(:,1:N_dn)); %Trivial K State.
-%          phi_1(:,:,5)=Phi_T5;
-%          
-%          Phi_T6=horzcat(psi_nonint(:,1:N_up),psi_nonint(:,1:N_dn-2),psi_nonint(:,N_dn+1:N_dn+2)); %Trivial K State.
-%          phi_1(:,:,6)=Phi_T6;
-%       
-%          Phi_T7=horzcat(psi_nonint(:,1:N_up-2),psi_nonint(:,N_up+1:N_up+2),psi_nonint(:,1:N_dn-1),psi_nonint(:,N_dn+1)); %Trivial K State.
-%          phi_1(:,:,7)=Phi_T7;
-%    
-%          Phi_T8=horzcat(psi_nonint(:,1:N_up-1),psi_nonint(:,N_up+1),psi_nonint(:,1:N_dn-2),psi_nonint(:,N_dn+1:N_dn+2)); %Trivial K State.
-%          phi_1(:,:,8)=Phi_T8;
-         
          phi_1=Phi_T;
          phi_2(:,1:N_up,n_phi)=eN_up(:,:)*phi_1(:,1:N_up);
          phi_2(:,N_up+1:N_par,n_phi)=eN_dn(:,:)*phi_1(:,N_up+1:N_par);
         
-%          phi_2(:,1:N_up,n_phi)=stblz_X(phi_2(:,1:N_up,n_phi),N_up);
-%          phi_2(:,N_up+1:N_par,n_phi)=stblz_X(phi_2(:,N_up+1:N_par,n_phi),N_dn);
+         phi_2(:,1:N_up,n_phi)=X_RBM_stblz_X(phi_2(:,1:N_up,n_phi),N_up);
+         phi_2(:,N_up+1:N_par,n_phi)=X_RBM_stblz_X(phi_2(:,N_up+1:N_par,n_phi),N_dn);
 %          
 %          phi_2(:,1:N_up,n_phi)=w(y2,1)*phi_2(:,1:N_up,n_phi);
 %          phi_2(:,N_up+1:N_par,n_phi)=w(y2,1)*phi_2(:,N_up+1:N_par,n_phi); 
@@ -101,6 +77,10 @@ N_par=N_up+N_dn;
           %% calculate the total energy:
            e(i,j)=potentialEnergy+kineticEnergy;
            
+          %% calculate the s1s
+           s1s=(n_up-n_dn)';
+           
+           S1S=S1S+s1s;
            N=N+n;
            E=E+e(i,j);
            RE=RE+re;
@@ -108,6 +88,7 @@ N_par=N_up+N_dn;
         end
     end
  
+ S1S=S1S/RE;
  N=N/RE;
  E=E/RE;
  E_real=E_real/RE_real;

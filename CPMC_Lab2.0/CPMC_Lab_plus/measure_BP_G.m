@@ -1,4 +1,4 @@
-function [e, e_V, e_K, s1s] = measure_BP_s1s(H_k, phi, Phi_T, N_sites, N_up, N_par, U, x, Proj_k_half, itv_Em, aux_fld, itv_modsvd)
+function [e, e_V, e_K, g] = measure_BP_G(H_k, phi, Phi_T, N_sites, N_up, N_par, U, x, Proj_k_half, itv_Em, aux_fld, itv_modsvd)
 % function e = measure(H_k, phi, Phi_T, invO_matrix_up, invO_matrix_dn, N_up, N_par, U)
 % Calculate the mixed estimator for the ground state energy of a walker
 % Inputs:
@@ -47,7 +47,7 @@ function [e, e_V, e_K, s1s] = measure_BP_s1s(H_k, phi, Phi_T, N_sites, N_up, N_p
       n_dn=abs(diag(G_dn));
       n(1:N_sites)=n_up(1:N_sites);
       n(N_sites+1:2*N_sites)=n_dn(1:N_sites);
-      s1s=(n_up-n_dn)';
+      g=horzcat(G_up,G_dn);
       
     %% calculate the potential energy:
     n_int=(diag(G_up)).'*diag(G_dn);

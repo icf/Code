@@ -10,17 +10,17 @@
 
 %% system parameters:
 Lx=4; % The number of lattice sites in the x direction
-Ly=2; % The number of lattice sites in the y direction
+Ly=4; % The number of lattice sites in the y direction
 Lz=1; % The number of lattice sites in the z direction
 
-N_up=4; % The number of spin-up electrons
-N_dn=4; % The number of spin-down electrons
+N_up=7; % The number of spin-up electrons
+N_dn=7; % The number of spin-down electrons
 
 kx=0; % The x component of the twist angle in TABC (twist-averaging boundary condition)
 ky=0; % The y component of the twist angle in TABC
 kz=0; % The z component of the twist angle in TABC
 
-U=4.0; % The on-site repulsion strength in the Hubbard Hamiltonian
+U=8.0; % The on-site repulsion strength in the Hubbard Hamiltonian
 tx=1; % The hopping amplitude between nearest-neighbor sites in the x direction
 ty=1; % The hopping amplitude between nearest neighbor sites in the y direction
 tz=1; % The hopping amplitude between nearest neighbor sites in the z direction

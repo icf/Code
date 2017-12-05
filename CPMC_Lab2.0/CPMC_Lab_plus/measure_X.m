@@ -1,4 +1,4 @@
-function [e, e_V, e_K, s1s] = measure_BP_s1s(H_k, phi, Phi_T, N_sites, N_up, N_par, U, x, Proj_k_half, itv_Em, aux_fld, itv_modsvd)
+function [e, Proj] = measure_X(H_k, phi, Phi_T, Phi_T2, invO_matrix_up, invO_matrix_dn, invO_matrix_up2, invO_matrix_dn2, N_up, N_par, U)
 % function e = measure(H_k, phi, Phi_T, invO_matrix_up, invO_matrix_dn, N_up, N_par, U)
 % Calculate the mixed estimator for the ground state energy of a walker
 % Inputs:
@@ -21,44 +21,35 @@ function [e, e_V, e_K, s1s] = measure_BP_s1s(H_k, phi, Phi_T, N_sites, N_up, N_p
 %   should cite the following journal article (in addition to the relevant literature on the method):
 % "CPMC-Lab: A Matlab Package for Constrained Path Monte Carlo Calculations" Comput. Phys. Commun. (2014)
 
-    %%  back paropagation, icf 2017/10/3
-    Phi=Phi_T;
-    for i_step=1:itv_Em
-        % Remember x,\phi if it is the timing, icf 2017/10/3
-        Phi = stepwlk_BP(Phi, x(:,mod(itv_Em-i_step, itv_Em)+1), N_sites, Proj_k_half, N_up, N_par, aux_fld);
-        %
-        if mod(i_step,itv_modsvd)==0
-            Phi = stblz_BP(Phi, N_up, N_par); % re-orthonormalize the walkers
-        end
-    end
     %%  calculate the single-particle Green's function matrix for each spin:
-    invO_matrix_up=inv(Phi(:,1:N_up)'*phi(:,1:N_up));
-    invO_matrix_dn=inv(Phi(:,N_up+1:N_par)'*phi(:,N_up+1:N_par));
+    invO_matrix_up=inv(Phi_T(:,1:N_up)'*phi(:,1:N_up));
+    invO_matrix_dn=inv(Phi_T(:,N_up+1:N_par)'*phi(:,N_up+1:N_par));
     temp_up=phi(:,1:N_up)*invO_matrix_up;
     temp_dn=phi(:,N_up+1:N_par)*invO_matrix_dn;
-    G_up=temp_up*Phi(:,1:N_up)';
-    G_dn=temp_dn*Phi(:,N_up+1:N_par)';
+    G_up=temp_up*Phi_T(:,1:N_up)';
+    G_dn=temp_dn*Phi_T(:,N_up+1:N_par)';
+    %
+    G_up2=Phi_T2(:,1:N_up)'*phi(:,1:N_up);
+    G_dn2=Phi_T2(:,N_up+1:N_par)'*phi(:,N_up+1:N_par);
+    %% Re
+    re_up_T2=det(Phi_T2(:,1:N_up)'*phi(:,1:N_up));
+    re_dn_T2=det(Phi_T2(:,N_up+1:N_par)'*phi(:,N_up+1:N_par));
+    re_T2=re_up_T2*re_dn_T2;
+    %
+    re_up_T=det(Phi_T(:,1:N_up)'*phi(:,1:N_up));
+    re_dn_T=det(Phi_T(:,N_up+1:N_par)'*phi(:,N_up+1:N_par));
+    re_T=re_up_T*re_dn_T;
+    %%
+    Proj=det(G_up2)*det(G_dn2)/re_T;
 
-    %% calculate S1Sj, icf 2017/10/20
-%     for j=1:N_sites
-%         s1s(j)=G_up(1,1)*G_up(j,j)+G_dn(1,1)*G_dn(j,j)-G_dn(1,1)*G_up(j,j)-G_up(1,1)*G_dn(j,j);
-%     end
-      n_up=abs(diag(G_up));
-      n_dn=abs(diag(G_dn));
-      n(1:N_sites)=n_up(1:N_sites);
-      n(N_sites+1:2*N_sites)=n_dn(1:N_sites);
-      s1s=(n_up-n_dn)';
-      
     %% calculate the potential energy:
     n_int=(diag(G_up)).'*diag(G_dn);
     potentialEnergy=n_int*U;
-    e_V=potentialEnergy;
 
     %% calculate the kinetic energy:
     kineticEnergy=sum(sum(H_k.'.*(G_up+G_dn))); % note the element-wise multiplication
-    e_K=kineticEnergy;
 
     %% calculate the total energy:
     e=potentialEnergy+kineticEnergy;
-    
+
 end

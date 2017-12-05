@@ -1,4 +1,4 @@
-function [E_ave,E_err,E_BP_ave,E_BP_err,E_V_BP_ave,E_V_BP_err,E_K_BP_ave,E_K_BP_err,S1S_BP_ave,S1S_BP_err,savedFileName]=CPMC_Lab_ED_s1s(Lx,Ly,Lz,N_up,N_dn,kx,ky,kz,U,tx,ty,tz,deltau,N_wlk,N_blksteps,N_eqblk,N_blk,itv_modsvd,itv_pc,itv_Em,suffix)
+function [E_ave,E_err,savedFileName]=CPMC_Lab_X(Lx,Ly,Lz,N_up,N_dn,kx,ky,kz,U,tx,ty,tz,deltau,N_wlk,N_blksteps,N_eqblk,N_blk,itv_modsvd,itv_pc,itv_Em,suffix,phi_2)
 % function [E_ave,E_err,savedFileName]=CPMC_Lab(Lx,Ly,Lz,N_up,N_dn,kx,ky,kz,U,tx,ty,tz,deltau,N_wlk,N_blksteps,N_eqblk,N_blk,itv_modsvd,itv_pc,itv_Em, suffix)
 % Perform a constrained path Monte Carlo calculatiion. Main function in the CPMC-Lab package
 % Input
@@ -38,48 +38,49 @@ function [E_ave,E_err,E_BP_ave,E_BP_err,E_V_BP_ave,E_V_BP_err,E_K_BP_ave,E_K_BP_
 
 %% Initialization
 tic; % start the  timer
-initialization_ED; % initialize internal constants, form the trial wave function and assemble the initial population of walkers
+initialization_X; % initialize internal constants, form the trial wave function and assemble the initial population of walkers
 format long;
 flag_mea=0; %determine when a measurement should take place
 E=0;
-E_K=0;
-E_V=0;
+PROJ=0;
 W=0;
 
 % Preallocate arrays:
 E_blk=zeros(N_blk,1); % array to store the energy measured in every block
-E_BP_blk=zeros(N_blk,1); % array to store the bp energy measured in every block
-E_K_BP_blk=zeros(N_blk,1);
-E_V_BP_blk=zeros(N_blk,1);
-S1S_BP_blk=zeros(N_blk,N_sites);
+PROJ_blk=zeros(N_blk,1);
 W_blk=zeros(N_blk,1); % array to store the total weight in every block
 
 %detect the Mixed Energy, icf 2017/9/17 
 E_det=zeros(N_eqblk*N_blksteps,1); %array to store the Mixed Energy in Equilibration phase.
-% Remember x,\phi if it is the timing, icf 2017/10/3
-x_save=zeros(N_sites,itv_Em,N_wlk);
-Phi_save=zeros(N_sites,N_par,N_wlk);
-
 %% Equilibration phase
 for i_blk=1:N_eqblk    
     for j_step=1:N_blksteps
-        [Phi, w, O, E, W] = stepwlk(Phi, N_wlk, N_sites, w, O, E, W, H_k, Proj_k_half, flag_mea, Phi_T, N_up, N_par, U, fac_norm, aux_fld);
         %detect the Mixed Energy, icf 2017/9/17
+        flag_mea=1;
+        %
+%         w=w
+        [Phi, w, O, E, PROJ, W] = stepwlk_X(Phi, N_wlk, N_sites, w, O, E, PROJ, W, H_k, Proj_k_half, flag_mea, Phi_T, Phi_T2, N_up, N_par, U, fac_norm, aux_fld);
+        %detect the Mixed Energy, icf 2017/9/17
+        kk=E/W
         E_det((i_blk-1)*N_blksteps+j_step,1)=E/W;
         %
         if mod(j_step,itv_modsvd)==0               %% 9-11
             [Phi, O] = stblz(Phi, N_wlk, O, N_up, N_par); % re-orthonormalize the walkers
         end
         if mod(j_step,itv_pc)==0
-            [Phi, w, O]=pop_cntrl(Phi, w, O, N_wlk, N_sites, N_par); % population control
+             [Phi, w, O]=pop_cntrl(Phi, w, O, N_wlk, N_sites, N_par); % population control
         end
     end
 end
+% detect the Mixed Energy, icf 2017/9/17
+% figure;
+% plot((1:N_eqblk*N_blksteps)*deltau,real(E_det));
+% xlabel ('Imaginary Time in E.P.');
+% ylabel ('E');
+% flag_mea=0;
 %
 
-%% Measurement phase   
-Phi_save=Phi;
-
+%% Measurement phase    
 for i_blk=1:N_blk
     for j_step=1:N_blksteps
         if mod(j_step,itv_Em)==0
@@ -88,57 +89,33 @@ for i_blk=1:N_blk
             flag_mea=0;
         end
         % propagate the walkers:
-        % Remember x,\phi if it is the timing, icf 2017/10/3
-        steps=mod(j_step-1,itv_Em)+1;
-        [Phi, w, O, E_blk(i_blk), E_BP_blk(i_blk), E_V_BP_blk(i_blk), E_K_BP_blk(i_blk), S1S_BP_blk(i_blk,:), W_blk(i_blk), x_save] = stepwlk_AP_s1s(Phi, Phi_save, N_wlk, N_sites, w, O, E_blk(i_blk), E_BP_blk(i_blk), E_V_BP_blk(i_blk), E_K_BP_blk(i_blk), S1S_BP_blk(i_blk,:), W_blk(i_blk), H_k, Proj_k_half, flag_mea, Phi_T, N_up, N_par, U, fac_norm, aux_fld, x_save, steps, itv_Em, itv_modsvd);
-        %
+        [Phi, w, O, E_blk(i_blk), PROJ_blk(i_blk), W_blk(i_blk)] = stepwlk_X(Phi, N_wlk, N_sites, w, O, E_blk(i_blk), PROJ_blk(i_blk), W_blk(i_blk), H_k, Proj_k_half, flag_mea, Phi_T, Phi_T2, N_up, N_par, U, fac_norm, aux_fld);
         if mod(j_step,itv_modsvd)==0
             [Phi, O] = stblz(Phi, N_wlk, O, N_up, N_par); % re-orthonormalize the walkers
         end
         if mod(j_step,itv_pc)==0
-            [Phi, Phi_save, x_save, w, O]=pop_cntrl_BP(Phi, Phi_save, x_save, w, O, N_wlk, N_sites, N_par, itv_Em); % population control
+            [Phi, w, O]=pop_cntrl(Phi, w, O, N_wlk, N_sites, N_par); % population control
         end
         if mod(j_step, itv_Em)==0
             % update the exponent of the pre-factor exp(-deltau*(H-E_T))
             fac_norm=(real(E_blk(i_blk)/W_blk(i_blk))-0.5*U*N_par)*deltau;
-            Phi_save=Phi;
-            x_save=zeros(N_sites,itv_Em,N_wlk);
         end
     end
     E_blk(i_blk)=E_blk(i_blk)/W_blk(i_blk);
-    E_BP_blk(i_blk)=E_BP_blk(i_blk)/W_blk(i_blk);
-    E_K_BP_blk(i_blk)=E_K_BP_blk(i_blk)/W_blk(i_blk);
-    E_V_BP_blk(i_blk)=E_V_BP_blk(i_blk)/W_blk(i_blk);
-    S1S_BP_blk(i_blk)=S1S_BP_blk(i_blk)/W_blk(i_blk);
+    PROJ_blk(i_blk)=PROJ_blk(i_blk);
     display(strcat('E(',int2str(i_blk),')=',num2str(real(E_blk(i_blk)))))
-    display(strcat('E_BP(',int2str(i_blk),')=',num2str(real(E_BP_blk(i_blk)))))
+    display(strcat('PROJ(',int2str(i_blk),')=',num2str(real(PROJ_blk(i_blk)))))
 end
 
 %% Results
 E=real(E_blk);
 E_ave=mean(E)
 E_err=std(E)/sqrt(N_blk)
-
-E_BP=real(E_BP_blk);
-E_BP_ave=mean(E_BP)
-E_BP_err=std(E_BP)/sqrt(N_blk)
-
-E_K_BP=real(E_K_BP_blk);
-E_K_BP_ave=mean(E_K_BP)
-E_K_BP_err=std(E_K_BP)/sqrt(N_blk)
-
-E_V_BP=real(E_V_BP_blk);
-E_V_BP_ave=mean(E_V_BP)
-E_V_BP_err=std(E_V_BP)/sqrt(N_blk)
-
-S1S_BP=real(S1S_BP_blk);
-S1S_BP_ave=mean(S1S_BP)
-S1S_BP_err=std(S1S_BP)/sqrt(N_blk)
 % The total computational time:
 time=toc() % stops the timer
 
 %% Save data to a *.mat file
-save (savedFileName, 'E', 'E_ave', 'E_err', 'E_BP', 'E_BP_ave', 'E_BP_err', 'time');
+save (savedFileName, 'E', 'E_ave', 'E_err', 'time');
 save (savedFileName, '-append', 'Lx', 'Ly','Lz', 'N_up', 'N_dn', 'kx', 'ky','kz', 'U', 'tx', 'ty','tz');
 save (savedFileName, '-append', 'deltau', 'N_wlk', 'N_blksteps', 'N_eqblk', 'N_blk', 'itv_pc','itv_modsvd','itv_Em');
 save (savedFileName, '-append', 'H_k', 'E_nonint_v', 'Phi_T');

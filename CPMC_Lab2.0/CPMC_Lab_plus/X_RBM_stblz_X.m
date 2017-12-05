@@ -1,4 +1,4 @@
-function Phi = stblz_BP(Phi, N_size)
+function Phi = X_RBM_stblz_X(Phi, N_size)
 % function [Phi, O] = stblz(Phi, N_wlk, O, N_up, N_par)
 % Perform the modified Gram-Schmidt orthogonalization to stabilize the walkers
 % Inputs:

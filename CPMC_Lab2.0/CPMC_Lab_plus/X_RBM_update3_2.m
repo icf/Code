@@ -7,7 +7,7 @@ flag=0;
 % a_T=stblz_X(a',N_y);
 % a=a_T';
 %% Energy for any X_RBM state
-[E,E_ED,E_real,N]=Energy_X_RBM3_2(a,w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
+[E,E_ED,E_real,N]=X_RBM_Energy_X_RBM3_2(a,w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
 if length(E_trace)==0
     E_trace(end+1) = E;
     N_trace=N;
@@ -33,10 +33,10 @@ for i2=1:N_sites+1
         end
         a0=a;
         w0=w;
-        [E21,E_ED2,E_real2,N21]=Energy_X_RBM3_2(a+delta_a,w+delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
-        [E22,E_ED2,E_real2,N22]=Energy_X_RBM3_2(a-delta_a,w+delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
-        [E23,E_ED2,E_real2,N23]=Energy_X_RBM3_2(a+delta_a,w-delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
-        [E24,E_ED2,E_real2,N24]=Energy_X_RBM3_2(a-delta_a,w-delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
+        [E21,E_ED2,E_real2,N21]=X_RBM_Energy_X_RBM3_2(a+delta_a,w+delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
+        [E22,E_ED2,E_real2,N22]=X_RBM_Energy_X_RBM3_2(a-delta_a,w+delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
+        [E23,E_ED2,E_real2,N23]=X_RBM_Energy_X_RBM3_2(a+delta_a,w-delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
+        [E24,E_ED2,E_real2,N24]=X_RBM_Energy_X_RBM3_2(a-delta_a,w-delta_w,Phi_T,N_sites,N_y,N_up,N_dn,U,H_k);
         %
         if E21+E_step_length <= E
            E=E21; 

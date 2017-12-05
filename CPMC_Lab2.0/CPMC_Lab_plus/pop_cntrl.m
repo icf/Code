@@ -14,7 +14,7 @@ function [Phi, w, O]=pop_cntrl(Phi, w, O, N_wlk, N_sites, N_par)
 %   O: the new array of overlaps
 %
 % Huy Nguyen, Hao Shi, Jie Xu and Shiwei Zhang
-% ©2014 v1.0
+% ?014 v1.0
 % Package homepage: http://cpmc-lab.wm.edu
 % Distributed under the <a href="matlab: web('http://cpc.cs.qub.ac.uk/licence/licence.html')">Computer Physics Communications Non-Profit Use License</a>
 % Any publications resulting from either applying or building on the present package 
