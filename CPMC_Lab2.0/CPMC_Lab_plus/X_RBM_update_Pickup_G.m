@@ -25,10 +25,10 @@ else
     end
 end
 
-for i=1:N_y+1
+for i=1:N_y
 for i2=1:N_sites*N_sites+1    
     delta_a=zeros(N_y,N_sites*N_sites);
-     if i~=N_y+1 && i2~=N_sites*N_sites+1 
+     if i2~=N_sites*N_sites+1 
         delta_a(i,i2)=a_step_length;
      end
     
@@ -70,7 +70,7 @@ for i2=1:N_sites*N_sites+1
            G_dif=X_RBM_G_dif(G,G_T,N_sites);
            if G_dif<G_dif_st
               E_trace(end+1) = E;
-              a_trace(end+1,:,:) = a0+delta_a;
+              a_trace(end+1,:,:) = a0-delta_a;
               w_trace(end+1,:,:) = w0+delta_w;
               N_trace=N22;
               G_trace=G22;
@@ -89,7 +89,7 @@ for i2=1:N_sites*N_sites+1
            if G_dif<G_dif_st
               E_trace(end+1) = E;
               a_trace(end+1,:,:) = a0+delta_a;
-              w_trace(end+1,:,:) = w0+delta_w;
+              w_trace(end+1,:,:) = w0-delta_w;
               N_trace=N23;
               G_trace=G23;
               G_dif_st=X_RBM_G_dif(G_trace,G_T,N_sites)
@@ -106,8 +106,8 @@ for i2=1:N_sites*N_sites+1
            G_dif=X_RBM_G_dif(G,G_T,N_sites);
            if G_dif<G_dif_st
               E_trace(end+1) = E;
-              a_trace(end+1,:,:) = a0+delta_a;
-              w_trace(end+1,:,:) = w0+delta_w;
+              a_trace(end+1,:,:) = a0-delta_a;
+              w_trace(end+1,:,:) = w0-delta_w;
               N_trace=N24;
               G_trace=G24;
               G_dif_st=X_RBM_G_dif(G_trace,G_T,N_sites)
@@ -125,12 +125,12 @@ end
 
 
 if flag==0
-   if a_step_length <= 0.001 
+   if a_step_length <= 0.01 
       flag=0;
-      a_step_length=10000*a_step_length;
-      w_step_length=10000*w_step_length;
+      a_step_length=1000*a_step_length;
+      w_step_length=1000*w_step_length;
       
-      a=rands(N_y,N_sites*N_sites);
+%       a=rands(N_y,N_sites*N_sites);
       w=rands(N_y,1);
    else
       flag=1;

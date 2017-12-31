@@ -36,7 +36,7 @@ N_par=N_up+N_dn;
              end
          end  
          eN_up=X_RBM_stblz_X(eN_up,N_sites);
-         eN_up=X_RBM_stblz_X(eN_dn,N_sites);
+         eN_dn=X_RBM_stblz_X(eN_dn,N_sites);
 
          phi_1=Phi_T;
          phi_2(:,1:N_up,n_phi)=eN_up(:,:)*phi_1(:,1:N_up);

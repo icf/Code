@@ -1,10 +1,10 @@
 %% system parameters:
 Lx=16; % The number of lattice sites in the x direction
-Ly=16; % The number of lattice sites in the y direction
+Ly=4; % The number of lattice sites in the y direction
 Lz=1; % The number of lattice sites in the z direction !only plot 2D Density Picture, so Lz=1.
 
-N_up=; % The number of spin-up electrons
-N_dn=540; % The number of spin-down electrons
+N_up=28; % The number of spin-up electrons
+N_dn=28; % The number of spin-down electrons
 
 % kx=2*rand(1)-1; % The x component of the twist angle in TABC (twist-averaging boundary condition)
 % ky=kx*Ly/Lx;
@@ -13,12 +13,12 @@ ky=0;
 %ky=2*rand(1)-1; % The y component of the twist angle in TABC
 kz=0; % The z component of the twist angle in TABC
 
-U=9.0; % The on-site repulsion strength in the Hubbard Hamiltonian
+U=2.79; % The on-site repulsion strength in the Hubbard Hamiltonian
 tx=1; % The hopping amplitude between nearest-neighbor sites in the x direction
 ty=1; % The hopping amplitude between nearest neighbor sites in the y direction
 tz=1; % The hopping amplitude between nearest neighbor sites in the z direction
 
-N_it=800;
+N_it=2000;
 a=0.75;
 
 %% Initialize the batch run
@@ -54,6 +54,21 @@ surf(xx,yy,zz);
 xlabel ('X\_site');
 ylabel ('Y\_site');
 zlabel ('n+\_ave');
+
+    Density_Ly_ave=0;
+    for j=1:Ly
+        Density_Ly_ave=Density_Ly_ave+1.-(n_ave(1+Lx*(j-1):Lx+Lx*(j-1))+n_ave(1+Lx*(j-1)+N_sites:Lx+Lx*(j-1)+N_sites));
+        figure;
+        plot(1.-(n_ave(1+Lx*(j-1):Lx+Lx*(j-1))+n_ave(1+Lx*(j-1)+N_sites:Lx+Lx*(j-1)+N_sites)));
+        xlabel ('site');
+        ylabel ('hole density');
+        
+    end
+    Density_Ly_ave=Density_Ly_ave/Ly;
+    figure;
+    plot(Density_Ly_ave);
+    xlabel ('site');
+    ylabel ('hole density ave');
 
 % figure;
 % [xx,yy]=meshgrid(x,y);

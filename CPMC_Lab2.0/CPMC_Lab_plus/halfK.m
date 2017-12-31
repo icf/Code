@@ -17,7 +17,7 @@ function [phi, w, O, invO_matrix_up, invO_matrix_dn] = halfK(phi, w, O, Proj_k_h
 %   invO_matrix_dn: the inverse of the spin down sector of the walker's overlap matrix 
 %
 % Huy Nguyen, Hao Shi, Jie Xu and Shiwei Zhang
-% ©2014 v1.0
+% ?014 v1.0
 % Package homepage: http://cpmc-lab.wm.edu
 % Distributed under the <a href="matlab: web('http://cpc.cs.qub.ac.uk/licence/licence.html')">Computer Physics Communications Non-Profit Use License</a>
 % Any publications resulting from either applying or building on the present package 

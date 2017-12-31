@@ -15,17 +15,30 @@ N_it_counter=1:1:N_it;
 x=1:1:Lx;
 y=1:1:Ly;
 
-H_k=H_K(Lx,Ly,Lz,kx,ky,kz,tx,ty,tz);
+H_k=H_K_pin(Lx,Ly,Lz,kx,ky,kz,tx,ty,tz);
 [psi_nonint,~] = eig(H_k);
 Phi_T=horzcat(psi_nonint(:,1:N_up),psi_nonint(:,1:N_dn));
 
 n_new_in=HF_n(Phi_T,N_sites,N_up,N_dn,N_par);
-n_new_in=[1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0,1,0];
+nn=(N_up+N_dn)/N_sites;
+for iy=1:Ly
+    for jx=1:Lx
+        if mod(jx+iy-1,2)==1
+           n_new_in(jx+(iy-1)*Lx)=0;
+           n_new_in(jx+(iy-1)*Lx+N_sites)=nn;
+        else
+           n_new_in(jx+(iy-1)*Lx+N_sites)=0;
+           n_new_in(jx+(iy-1)*Lx)=nn;
+        end
+    end
+end
+% n_new_in=[1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0,1,0];
 %n_new_in=[0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25];
 %% HF iteration
 for i=1:N_it
     n_old_in=n_new_in;
-    Phi=HF_H(n_old_in,H_k,N_sites,N_up,N_dn,U);
+%     Phi=HF_H(n_old_in,H_k,N_sites,N_up,N_dn,U);
+    Phi=HF_H_pin(n_old_in,H_k,N_sites,N_up,N_dn,U,Lx,Ly,Lz,kx,ky,kz,tx,ty,tz);
     n_old_out=HF_n(Phi,N_sites,N_up,N_dn,N_par);
     n_new_in=(1-a)*n_old_in+a*n_old_out;
     err(i)=sum((n_old_out-n_old_in).^2);

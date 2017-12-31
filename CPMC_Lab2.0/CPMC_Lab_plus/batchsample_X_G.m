@@ -27,7 +27,7 @@ tz=1; % The hopping amplitude between nearest neighbor sites in the z direction
 
 %% run parameters:
 deltau=0.01; % The imaginary time step
-N_wlk=[100:1:110]; % The number of random walkers
+N_wlk=[100:1:100]; % The number of random walkers
 N_blksteps=100; % The number of random walk steps in each block
 N_eqblk=5; % The number of blocks used to equilibrate the random walk before energy measurement takes place
 N_blk=10; % The number of blocks used in the measurement phase
