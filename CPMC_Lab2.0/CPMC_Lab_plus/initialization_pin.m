@@ -27,10 +27,11 @@ Proj_pin_dn_half = expm(-0.5*deltau*H_pin_dn);
 
 %% Initialize the trial wave function and calculate the ensemble's initial energy 
 % Diagonalize the one-body kinetic Hamiltonian to get the non-interacting single-particle orbitals:
-[psi_nonint,E_nonint_m] = eig(H_k);
+[psi_nonint1,E_nonint_m] = eig(H_k+H_pin_up);
 E_nonint_v=diag(E_nonint_m);
+[psi_nonint2,E_nonint_m] = eig(H_k+H_pin_dn);
 % assemble the non-interacting single-particle orbitals into a Slater determinant:
-Phi_T=horzcat(psi_nonint(:,1:N_up),psi_nonint(:,1:N_dn));
+Phi_T=horzcat(psi_nonint1(:,1:N_up),psi_nonint2(:,1:N_dn));
 % the kinetic energy of the trial wave function
 E_K=sum(E_nonint_v(1:N_up))+sum(E_nonint_v(1:N_dn));
 % the potential energy of the trial wave function

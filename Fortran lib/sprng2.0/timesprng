@@ -1,0 +1,72 @@
+echo
+echo lfg: Timing C interface:
+./timingcsprng < gen0_lfg
+echo
+echo lcg: Timing C interface:
+./timingcsprng < gen1_lcg
+echo
+echo lcg64: Timing C interface:
+./timingcsprng < gen2_lcg64
+echo
+echo cmrg: Timing C interface:
+./timingcsprng < gen3_cmrg
+echo
+echo mlfg: Timing C interface:
+./timingcsprng < gen4_mlfg
+echo
+echo pmlcg: Timing C interface:
+./timingcsprng < gen5_pmlcg
+echo
+echo lfg: Timing C interface:
+./timingcsprng < gen0_lfg
+echo
+echo lcg: Timing C interface:
+./timingcsprng < gen1_lcg
+echo
+echo lcg64: Timing C interface:
+./timingcsprng < gen2_lcg64
+echo
+echo cmrg: Timing C interface:
+./timingcsprng < gen3_cmrg
+echo
+echo mlfg: Timing C interface:
+./timingcsprng < gen4_mlfg
+echo
+echo pmlcg: Timing C interface:
+./timingcsprng < gen5_pmlcg
+echo
+echo lfg: Timing C interface:
+./timingcsprng < gen0_lfg
+echo
+echo lcg: Timing C interface:
+./timingcsprng < gen1_lcg
+echo
+echo lcg64: Timing C interface:
+./timingcsprng < gen2_lcg64
+echo
+echo cmrg: Timing C interface:
+./timingcsprng < gen3_cmrg
+echo
+echo mlfg: Timing C interface:
+./timingcsprng < gen4_mlfg
+echo
+echo pmlcg: Timing C interface:
+./timingcsprng < gen5_pmlcg
+echo
+echo lfg: Timing C interface:
+./timingcsprng < gen0_lfg
+echo
+echo lcg: Timing C interface:
+./timingcsprng < gen1_lcg
+echo
+echo lcg64: Timing C interface:
+./timingcsprng < gen2_lcg64
+echo
+echo cmrg: Timing C interface:
+./timingcsprng < gen3_cmrg
+echo
+echo mlfg: Timing C interface:
+./timingcsprng < gen4_mlfg
+echo
+echo pmlcg: Timing C interface:
+./timingcsprng < gen5_pmlcg

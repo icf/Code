@@ -35,9 +35,9 @@ function H=H_PIN_up(Lx,Ly,Lz,kx,ky,kz,tx,ty,tz)
                 r=r+1;      % r=(iy-1)*Lx+jx;
                 if Lx~=1
                     if jx==1
-                        H(r,r)=H(r,r)-(-1)^Ly*0.25;
+                        H(r,r)=H(r,r)-(-1)^Ly*0;
                     elseif jx==Lx
-                        H(r,r)=H(r,r)-(-1)^Ly*0.25;
+                        H(r,r)=H(r,r)-(-1)^Ly*0;
                     end
                 end
             end

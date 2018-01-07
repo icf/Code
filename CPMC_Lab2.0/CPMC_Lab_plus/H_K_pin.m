@@ -108,11 +108,11 @@ function H=H_K_pin(Lx,Ly,Lz,kx,ky,kz,tx,ty,tz)
                 r=r+1;      % r=(iy-1)*Lx+jx;
                 if Lx~=1
                     if jx==1
-%                         H(r,r+Lx-1)=H(r,r+Lx-1)-tx*exp(kx);
+                        % H(r,r+Lx-1)=H(r,r+Lx-1)-tx*exp(kx);
                         H(r,r+1)=H(r,r+1)-tx;
                     elseif jx==Lx
                         H(r,r-1)=H(r,r-1)-tx;
-%                         H(r,r+1-Lx)=H(r,r+1-Lx)-tx*exp(-kx);
+                       %  H(r,r+1-Lx)=H(r,r+1-Lx)-tx*exp(-kx);
                     else
                         H(r,r-1)=-tx;
                         H(r,r+1)=-tx;

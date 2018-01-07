@@ -1,0 +1,216 @@
+echo
+echo lfg: Checking Default C interface:
+./check.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking Simple C interface:
+./check_sim.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lcg: Checking Default C interface:
+./check.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking Simple C interface:
+./check_sim.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg64: Checking Default C interface:
+./check.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking Simple C interface:
+./check_sim.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking C interface with pointer checking:
+./check_ptr.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo cmrg: Checking Default C interface:
+./check.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking Simple C interface:
+./check_sim.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo mlfg: Checking Default C interface:
+./check.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking Simple C interface:
+./check_sim.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo pmlcg: Checking Default C interface:
+./check.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking Simple C interface:
+./check_sim.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo lfg: Checking Default C interface:
+./check.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking Simple C interface:
+./check_sim.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lcg: Checking Default C interface:
+./check.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking Simple C interface:
+./check_sim.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg64: Checking Default C interface:
+./check.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking Simple C interface:
+./check_sim.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking C interface with pointer checking:
+./check_ptr.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo cmrg: Checking Default C interface:
+./check.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking Simple C interface:
+./check_sim.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo mlfg: Checking Default C interface:
+./check.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking Simple C interface:
+./check_sim.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo pmlcg: Checking Default C interface:
+./check.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking Simple C interface:
+./check_sim.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo lfg: Checking Default C interface:
+./check.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking Simple C interface:
+./check_sim.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lcg: Checking Default C interface:
+./check.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking Simple C interface:
+./check_sim.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg64: Checking Default C interface:
+./check.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking Simple C interface:
+./check_sim.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking C interface with pointer checking:
+./check_ptr.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo cmrg: Checking Default C interface:
+./check.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking Simple C interface:
+./check_sim.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo mlfg: Checking Default C interface:
+./check.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking Simple C interface:
+./check_sim.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo pmlcg: Checking Default C interface:
+./check.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking Simple C interface:
+./check_sim.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo lfg: Checking Default C interface:
+./check.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking Simple C interface:
+./check_sim.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen0_lfg.data 2> /dev/null
+echo
+echo lcg: Checking Default C interface:
+./check.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking Simple C interface:
+./check_sim.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen1_lcg.data 2> /dev/null
+echo
+echo lcg64: Checking Default C interface:
+./check.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking Simple C interface:
+./check_sim.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo lcg64: Checking C interface with pointer checking:
+./check_ptr.csprng < gen2_lcg64.data 2> /dev/null
+echo
+echo cmrg: Checking Default C interface:
+./check.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking Simple C interface:
+./check_sim.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo cmrg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen3_cmrg.data 2> /dev/null
+echo
+echo mlfg: Checking Default C interface:
+./check.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking Simple C interface:
+./check_sim.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo mlfg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen4_mlfg.data 2> /dev/null
+echo
+echo pmlcg: Checking Default C interface:
+./check.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking Simple C interface:
+./check_sim.csprng < gen5_pmlcg.data 2> /dev/null
+echo
+echo pmlcg: Checking C interface with pointer checking:
+./check_ptr.csprng < gen5_pmlcg.data 2> /dev/null
