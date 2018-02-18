@@ -22,6 +22,7 @@ call openUnit(ScorrName,20,'R')
 call openUnit(SkName,30,'R')
 call openUnit(ckName,40,'R')
 call openUnit(numName,50,'R')
+call openUnit(ccName,60,'R')
 do i=1,max_local,1
    pt=dble(Thermblock*blockstep+i*meastep)*dt
 
@@ -53,6 +54,7 @@ do i=1,max_local,1
       do sitej=1,2*Nsite,1
          call err_anal_c(cicj_l_global(1:Nsamples,sitei,sitej,i),Nsamples,cicj_sc_global(sitei,sitej),err_c)
       enddo
+      write(60,'(I4,3f15.8)') sitei,pt,abs(cicj_sc_global(sitei,sitei)),abs(err_c)
    end do
 
 end do
@@ -61,6 +63,7 @@ close(20)
 close(30)
 close(40)
 close(50)
+close(60)
 end subroutine data_step_mc
 
 
@@ -131,6 +134,7 @@ call openUnit(ScorrName,20,'R')
 call openUnit(SkName,30,'R')
 call openUnit(ckName,40,'R')
 call openUnit(numName,50,'R')
+call openUnit(ccName,60,'R')
 max_n=max(max_crn,0)
 if(fw_bk.NE.'FW') max_n=0 !for release back propogation.
 do i=0,max_n,1
@@ -164,6 +168,7 @@ do i=0,max_n,1
       do sitej=1,2*Nsite,1
          call err_anal_c(cicj_l_global(1:Nsamples,sitei,sitej,i),Nsamples,cicj_sc_global(sitei,sitej),err_c)
       enddo
+      write(60,'(I4,3f15.8)') sitei,pt,abs(cicj_sc_global(sitei,sitei)),abs(err_c)
    end do
 end do
 close(10)
@@ -171,6 +176,7 @@ close(20)
 close(30)
 close(40)
 close(50)
+close(60)
 end subroutine data_cpmc_rcpmc
 
 

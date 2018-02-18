@@ -26,5 +26,36 @@
 	<Files>
 		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
-		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl"/></Files>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath="..\..\adjustET.F90"/>
+		<File RelativePath="..\..\back_propagation.F90"/>
+		<File RelativePath="..\..\backup_phi.F90"/>
+		<File RelativePath="..\..\caldet.F90"/>
+		<File RelativePath="..\..\cpmc.F90"/>
+		<File RelativePath="..\..\data_manip.F90"/>
+		<File RelativePath="..\..\file_name.F90"/>
+		<File RelativePath="..\..\fortran_bug.f90"/>
+		<File RelativePath="..\..\initial_end.F90"/>
+		<File RelativePath="..\..\initial_kv.F90"/>
+		<File RelativePath="..\..\initial_phi.F90"/>
+		<File RelativePath="..\..\initial_phiT.F90"/>
+		<File RelativePath="..\..\io_module.F90"/>
+		<File RelativePath="..\..\lattice_inform.F90"/>
+		<File RelativePath="..\..\main-t.f90"/>
+		<File RelativePath="..\..\main.F90"/>
+		<File RelativePath="..\..\matrix_cpmc.F90"/>
+		<File RelativePath="..\..\matrix_dc.F90"/>
+		<File RelativePath="..\..\matrixcal.F90"/>
+		<File RelativePath="..\..\meas_cicj.F90"/>
+		<File RelativePath="..\..\meas_htwo.F90"/>
+		<File RelativePath="..\..\meas_sisj.F90"/>
+		<File RelativePath="..\..\measure.F90"/>
+		<File RelativePath="..\..\modified_GS.F90"/>
+		<File RelativePath="..\..\params.F90"/>
+		<File RelativePath="..\..\population.F90"/>
+		<File RelativePath="..\..\rcpmc.F90"/>
+		<File RelativePath="..\..\sprng_rndm.F90"/>
+		<File RelativePath="..\..\step_qmc.F90"/>
+		<File RelativePath="..\..\timing_module.F90"/>
+		<File RelativePath="..\..\update.F90"/></Filter></Files>
 	<Globals/></VisualStudioProject>

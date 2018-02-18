@@ -188,7 +188,7 @@ implicit none
  real(kind=8),allocatable::ck_l(:,:,:)
  complex(kind=8),allocatable::sig(:)!Use to decide the sign of the free project problem
  complex(kind=8),allocatable::absig(:)
- character(len=300)::basename,EnergyName,numName,scorrName,skName,ckName
+ character(len=300)::basename,EnergyName,numName,scorrName,skName,ckName,ccName
 end module meas_param
 
 
