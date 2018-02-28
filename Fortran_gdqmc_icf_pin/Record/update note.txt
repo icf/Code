@@ -1,0 +1,64 @@
+1.0: 1/7/2018
+0) add pinning field by changing lattice_inform.F90.
+   add fortran_bug.f90 to solve gfortran compiler bug.
+   
+1) get global c^+icj form Original Code gdqmc-1.3 as "cicj_sc_global" by modifying:
+initial_end.F90]--->measure.F90]--->datamanip.F90 
+params.F90     ]    main.F90   ]
+
+2) write c^+ici to ccName_cc.dat:
+param.F90--->filename.F90--->data_manip.F90
+
+1.1: 1/8/2018
+1) add sc_flag to sc_loop_param in params.F90
+   add S.C loop steps in Main.F90
+   add get_cc_phiT in S.C. loop steps in initial_phiT.F90
+   add sc_loop_num in initial_end.F90 Readparam 
+   some change about allocate and deallocate in S.C. loop steps
+
+1.1a: 1/10/2018
+1) add muti-phiT
+   Dtot
+2) chang initial_phiT:
+   coe_multi
+   norm_arry
+
+1.1b: 1/11/2018
+1) add inheritation in initial_phiT
+
+1.1d: 1/15/2018
+
+1) add sisj (up - dn) from 1.1b
+
+! add sc_ite_flag in linux (haven't update here yet!!)
+
+1.2: 1/19/2018
+1) recorrect pinning field (- ... +)
+
+1.2a:1/23/2018
+1£© add EV_*.dat print in Initial_phiT.F90
+    add cc_decomp_error in Initial_phiT.F90
+
+1.2b:1/26/2018
+1)  cicj calculation for MPI (by adding 'cicj_l_global=zero;' in 'cpmc()' )
+2)  sisj--> (Amat(i,i)-Amat(i+Nsite,i+Nsite))
+3£© add '-D MPI' in Makefile (Define MPI) and change 'FLAGS' --> 'FFLAGS'
+4)  'coe_muti' defined beyound rank==0 in initial_phiT.F90 get_cc_phiT 
+5)  'non-allocated matrix calcualtion' modefication for ifort in initial_phiT.F90
+
+1.21b:1/31/2018
+1) add counter for number_of_loop_steps
+2)  'coe_muti' defined beyound rank==0 in initial_phiT.F90 get_cc_phiT £¨Attention: "input_phiT_d_cc" only apply at rank=0 thread£©
+3)  'non-allocated matrix calcualtion' modefication for ifort in initial_phiT.F90
+
+2.0:18/2/2018
+1) use pseudo-BCS state as "trial function" in CPMC ( without inherit: sc_ite_flag=0, and Def BCS_sc ( Bcast (MPI_DOUBLE_COMPLEX) in MPI) )
+2) The construction of BCS_sc may still need dicussion
+
+2.1:27/2/2018
+1) use pseudo-BCS state as "trial function" in CPMC by changing (some was applied at 2.0):
+1.Define BCS_sc to present the pseudo-BCS state (Bcast (MPI_DOUBLE_COMPLEX) in MPI)
+2.Rewrite over_lap_dc, get_imp_inv and so on, refers to the change from "<phiT|phi>" to "<BCS|phi>"
+3.Rewrite GreenFunction in get_BCS_green_matrix_ij and cal_BCS_Amat_withovlpinv_dc, refers to the change from "<BCS|c^+icj|phi>" to "<BCS|c^+icj|phi>" 
+4.Rewrite the way to get "inver"(inverse(<BCS|phi>)) (brute force not S-M Formula) and "ratio" (important sampling term <BCS|phi'>/<BCS|phi> ?) (brute force)
+5.Haven't apply Back Propogation at BCS-cpmc step 
