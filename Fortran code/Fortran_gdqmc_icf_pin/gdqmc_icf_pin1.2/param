@@ -1,0 +1,38 @@
+2        !set:1 by hand 2 TBC
+9      !Nsite->set=1
+36       !Nhop->set=1
+2      !Dimen->set/=1
+4        !Nl(1)->set/=1 & Dimen>=1
+4        !Nl(2)->set/=1 & Dimen>=2
+1        !Nl(3)->set/=1 & Dimen=3
+0.d0    !kbound(1)->set=3 & Dimen>=1
+0.d0    !kbound(2)->set=3 & Dimen>=2
+0.d0    !kbound(3)->set=3 & Dimen>=3
+(-1.d0,0.d0)     !t1 Hubbard hopping t1 in nearest direction.
+8.d0     !onsitU Hubbard U interaction on the same site.
+14       !Ntot the up spin and down spin particle numbers
+d      !dtype for the determinate type: d decouple, c couple.
+7     !Nspin(1) means Nup
+7     !Nspin(2) means Ndn
+-1.d0        !crn the number of release node
+0.d0       !ccoe control the release in pop :1.d0 total free wi, 0.d0 wi<phiT|phi>
+0    !max_crn control the release node
+S        !dcp The decouple method:'S' or 'C'
+2       !kcrn 1.d s;2.d c;3.c s;4 c c:for different kinds of release method
+1      !bgset 0. mean field 1. dynamic background walker
+BK      !fw_bk FW means no back propogation,BK means back propogation.
+0       !Nbk(1) is the free projection path
+80       !Nbk(2) is the constraint path
+50       !Number of loop steps in S.C.
+20   !Nsamples number of sampling do we need in MC process.
+180   !Nwalkers number of  walkers
+1  !blockstep Block number which inidcate the basic size
+800 !Thermblock number of blocks do we need in thermal process.
+30   !Neqblock  number of blocks do we need in equilibrium step(update and measure)
+5 !PopContrlstep  we need to do population control and adjust ET
+5   !StepforGram number of steps when we do modified GS
+5    !meastep number of steps when we need to do measure
+0.05d0         !dt each slice of imagine time
+1         !PT:0 read from file, 1 set by FS: For the phiT.
+1         !PP:0 read from file, 1 set by phiT: For the phi.
+100     !max_ad for free-projection

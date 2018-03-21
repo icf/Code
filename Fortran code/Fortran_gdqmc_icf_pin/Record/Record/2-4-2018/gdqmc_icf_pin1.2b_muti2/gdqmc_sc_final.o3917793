@@ -1,0 +1,4 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+=>> PBS: job killed: walltime 172812 exceeded limit 172800
+Terminated

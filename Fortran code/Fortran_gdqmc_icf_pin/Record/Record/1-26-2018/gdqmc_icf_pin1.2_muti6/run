@@ -1,0 +1,8 @@
+#!/bin/tcsh 
+#PBS -N gdqmc_para_test
+#PBS -l walltime=24:00:00
+#PBS -l nodes=5:bora:ppn=20
+#PBS -j oe 
+
+cd $PBS_O_WORKDIR
+mvp2run /sciclone/pscr/zxiao01/gdqmc_icf_pin1.2/cpqmc-pinning >& LOG

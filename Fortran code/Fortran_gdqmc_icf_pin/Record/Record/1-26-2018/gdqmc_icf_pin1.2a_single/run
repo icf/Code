@@ -1,0 +1,7 @@
+#!/bin/tcsh
+#PBS -l walltime=24:00:00
+#PBS -N icf_gdqmc_icf_pin1.2a_1core_testrun
+#PBS -j oe
+cd $PBS_O_WORKDIR
+
+/sciclone/pscr/zxiao01/gdqmc_icf_pin1.2a/cpqmc-pinning 
