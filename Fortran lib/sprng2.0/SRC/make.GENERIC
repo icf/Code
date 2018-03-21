@@ -3,9 +3,9 @@ ARFLAGS = cr
 #If your system has ranlib, then replace next statement with the one after it.
 RANLIB = echo
 #RANLIB = ranlib
-CC = gcc
+CC = mpicc
 CLD = $(CC)
-F77 = f77
+F77 = mpif90
 F77LD = $(F77)
 FFXN =  -DAdd_
 FSUFFIX = F
@@ -18,18 +18,18 @@ MPICC = $(CC)
 # Also, if the previous compilation was without MPI, type: make realclean
 # before compiling for mpi.
 #
-MPIDIR = 
-MPILIB = 
+MPIDIR =  -L${MVAPICH2_HOME}/lib 
+MPILIB =  -lfmpich  -lmpich  -lmpichcxx  -lmpichf90  -lmpl  -lopa
 
 # If _LONG_LONG type is available, then you can use the addition flag
 # -D_LONG_LONG. Set F77 to echo to compile the C version alone. 
 # Try adding: -DGENERIC to CFLAGS. This can improve speed, but may give
 # incorrect values. Check with 'checksprng' to see if it works.
 
-CFLAGS = -O $(PMLCGDEF) $(MPIDEF)
-CLDFLAGS = -O
-FFLAGS = -O $(PMLCGDEF) $(MPIDEF)
-F77LDFLAGS = -O
+CFLAGS =  -O3 -DLittleEndian $(PMLCGDEF) $(MPIDEF) -D$(PLAT) -I${MVAPICH2_HOME}/include
+CLDFLAGS = -O3
+FFLAGS = -O3 -DPOINTER_SIZE=8 $(PMLCGDEF) $(MPIDEF) -D$(PLAT) -I${MVAPICH2_HOME}/include
+F77LDFLAGS = -O3
 
-CPP = f77 -F
+CPP = cpp -P
 

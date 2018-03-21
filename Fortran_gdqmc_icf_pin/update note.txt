@@ -1,8 +1,0 @@
-1.0: 1/7/2018
-
-0) add pinning field by changing lattice_inform.F90.
-   add fortran_bug.f90 to solve gfortran compiler bug.
-   
-1) get global c^+icj form Original Code gdqmc-1.3 as "cicj_sc_global" by modifying:
-initial_end.F90]--->measure.F90]--->datamanip.F90 
-params.F90     ]    main.F90   ]

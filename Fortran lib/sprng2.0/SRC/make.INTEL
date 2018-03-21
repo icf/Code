@@ -1,18 +1,18 @@
 AR = ar
 ARFLAGS = cr
 #If your system does not have ranlib, then replace next statement with 
-RANLIB = echo
-#RANLIB = ranlib
+#RANLIB = echo
+RANLIB = ranlib
 CC = gcc
 CLD = $(CC)
 # Set f77 to echo if you do not have a FORTRAN compiler
-#F77 = g77
-F77 = echo
+F77 = gfortran #g77
+#F77 = echo
 F77LD = $(F77)
 FFXN = -DAdd_
 FSUFFIX = F
 
-MPIF77 = mpif77
+MPIF77 = mpif90 # mpif77
 MPICC = mpicc
 
 # To use MPI, set the MPIDIR to location of mpi library, and MPILIB 
@@ -23,14 +23,19 @@ MPICC = mpicc
 # COMMENTED BY ME
 #MPIDIR = -L/usr/local/mpi/build/LINUX/ch_p4/lib
 #MPILIB = -lmpich
+MPIDIR =  -L/usr/lib/mpich/lib
+MPILIB = -lmpich
+
 
 # Please include mpi header file path, if needed
 
 #CFLAGS = -O3 -DLittleEndian $(PMLCGDEF) $(MPIDEF) -D$(PLAT)  -I/usr/local/mpi/include -I/usr/local/mpi/build/LINUX/ch_p4/include
-CFLAGS = -O3 -DLittleEndian $(PMLCGDEF) $(MPIDEF) -D$(PLAT)  
+#CFLAGS = -O3 -DLittleEndian $(PMLCGDEF) $(MPIDEF) -D$(PLAT)  
+CFLAGS = -O3 -DLittleEndian $(PMLCGDEF) $(MPIDEF) -D$(PLAT)  -I/usr/lib/mpich/include -I/usr/include
 CLDFLAGS =  -O3 
 #FFLAGS = -O3 $(PMLCGDEF) $(MPIDEF) -D$(PLAT)  -I/usr/local/mpi/include -I/usr/local/mpi/build/LINUX/ch_p4/include -I.
-FFLAGS = -O3 $(PMLCGDEF) $(MPIDEF) -D$(PLAT)
+#FFLAGS = -O3 $(PMLCGDEF) $(MPIDEF) -D$(PLAT)
+FFLAGS = -O3 $(PMLCGDEF) $(MPIDEF) -D$(PLAT) -I/usr/lib/mpich/include -I/usr/include -DPOINTER_SIZE=8 
 F77LDFLAGS =  -O3 
 
 CPP = cpp -P

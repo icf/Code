@@ -1,0 +1,4 @@
+1.1: Add 'sc' to Ettore's code
+1) Def param of sc in param.F90 and allocate/deallocate them in initial_end.F90
+2) Save cicj_sc_global (indeed the OBDM is the same with cicj_sc_global) and let Fpairing=BCS_sc 
+3) BCAST Fpairing to all rank 

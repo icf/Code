@@ -9,7 +9,7 @@
 #include "sprng.h"
 
 #define PARALLEL
-#define SYNC1
+#define SYNC 1
 
 int lattice_size, *spin, nsites;
 int **genptr;			/* array of random number generators */
