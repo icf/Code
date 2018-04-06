@@ -2,3 +2,7 @@
 1) Def param of sc in param.F90 and allocate/deallocate them in initial_end.F90
 2) Save cicj_sc_global (indeed the OBDM is the same with cicj_sc_global) and let Fpairing=BCS_sc 
 3) BCAST Fpairing to all rank 
+
+1.2: Use fake_BCS state to simulate the Green Function after CPMC calculation
+
+1.2HF: Add HF to 1.2
