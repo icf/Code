@@ -295,7 +295,9 @@ integer::j
 real(kind=8)::pt,e_t,e_e,v_t,v_e,k_t,k_e,var_t,var_e,sgn
 real(kind=8)::var_tmp
 call get_filename()
-call openUnit(EnergyName,10,'O')
+call 
+
+(EnergyName,10,'O')
 var_tmp=1d100
 do j=1,max_local,1
    read(10,'(10f15.8)') pt,k_t,k_e,v_t,v_e,e_t,e_e,var_t,var_e,sgn

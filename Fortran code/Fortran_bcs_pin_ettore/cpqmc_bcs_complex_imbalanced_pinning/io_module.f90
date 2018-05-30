@@ -123,7 +123,10 @@ INQUIRE(FILE=baseName, EXIST=CheckName)
 
 END FUNCTION CheckName
 
-SUBROUTINE openUnit(fileName,myUnit,openKind)
+SUBROUTINE 
+
+
+(fileName,myUnit,openKind)
 !
 !Purpose: Open a file 'filename' as UNIT=myUnit
 !An error message is returned if the specified file cannot be opened

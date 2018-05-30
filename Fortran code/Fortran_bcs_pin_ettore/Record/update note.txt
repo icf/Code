@@ -3,6 +3,10 @@
 2) Save cicj_sc_global (indeed the OBDM is the same with cicj_sc_global) and let Fpairing=BCS_sc 
 3) BCAST Fpairing to all rank 
 
-1.2: Use fake_BCS state to simulate the Green Function after CPMC calculation
+1.2: Use fake_BCS state to simulate the Green Function after CPMC calculation £¨more parameter than DET£©
 
 1.2HF: Add HF to 1.2
+
+1.2Analytic: Add allopen BC for 1 band model (a)
+
+1.3: Add output of observables along every step and some control parameters at param.F90

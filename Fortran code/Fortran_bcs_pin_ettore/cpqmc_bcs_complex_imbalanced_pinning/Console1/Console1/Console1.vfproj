@@ -26,5 +26,49 @@
 	<Files>
 		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
-		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl"/></Files>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath="..\..\adjustET.f90"/>
+		<File RelativePath="..\..\back_propagation.f90"/>
+		<File RelativePath="..\..\backup_phi.f90"/>
+		<File RelativePath="..\..\bcs_green_pure.f90"/>
+		<File RelativePath="..\..\bcs_update.f90"/>
+		<File RelativePath="..\..\caldet.f90"/>
+		<File RelativePath="..\..\cpmc.f90"/>
+		<File RelativePath="..\..\data_manip.f90"/>
+		<File RelativePath="..\..\dynamics.f90"/>
+		<File RelativePath="..\..\file_name.f90"/>
+		<File RelativePath="..\..\green_holes.f90"/>
+		<File RelativePath="..\..\green_particles.f90"/>
+		<File RelativePath="..\..\green_particles_commented.f90"/>
+		<File RelativePath="..\..\initial_end.f90"/>
+		<File RelativePath="..\..\initial_kv.f90"/>
+		<File RelativePath="..\..\initial_phi.f90"/>
+		<File RelativePath="..\..\initial_phiT.f90"/>
+		<File RelativePath="..\..\io_module.f90"/>
+		<File RelativePath="..\..\lattice_inform.f90"/>
+		<File RelativePath="..\..\main-t.f90"/>
+		<File RelativePath="..\..\main.f90"/>
+		<File RelativePath="..\..\matrix_cpmc.f90"/>
+		<File RelativePath="..\..\matrix_dc.f90"/>
+		<File RelativePath="..\..\matrixcal.f90"/>
+		<File RelativePath="..\..\meas_cicj.f90"/>
+		<File RelativePath="..\..\meas_htwo.f90"/>
+		<File RelativePath="..\..\meas_ninj.f90"/>
+		<File RelativePath="..\..\meas_pairing.f90"/>
+		<File RelativePath="..\..\meas_sisj.f90"/>
+		<File RelativePath="..\..\measure.f90"/>
+		<File RelativePath="..\..\measure_dynamics.f90"/>
+		<File RelativePath="..\..\measure_energy.f90"/>
+		<File RelativePath="..\..\measure_two_body_beta.f90"/>
+		<File RelativePath="..\..\modified_GS.f90"/>
+		<File RelativePath="..\..\old_bcs_green_pure.f90"/>
+		<File RelativePath="..\..\params.f90"/>
+		<File RelativePath="..\..\population.f90"/>
+		<File RelativePath="..\..\print_observables.f90"/>
+		<File RelativePath="..\..\rcpmc.f90"/>
+		<File RelativePath="..\..\response_functions.f90"/>
+		<File RelativePath="..\..\sprng_rndm.f90"/>
+		<File RelativePath="..\..\step_qmc.f90"/>
+		<File RelativePath="..\..\timing_module.f90"/>
+		<File RelativePath="..\..\update.f90"/></Filter></Files>
 	<Globals/></VisualStudioProject>
