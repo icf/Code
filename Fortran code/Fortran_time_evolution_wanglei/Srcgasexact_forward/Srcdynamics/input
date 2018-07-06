@@ -1,0 +1,8 @@
+&SystemSettings
+ Nsite=2, nup=1, ndo=1, Maxsteps=1000,stepforcycle=20, dt=0.01, Dir='./'
+&end
+
+&FHParams
+ Thop=1.0, U=0.5, Mu=0.0, Vext=0.0, stagger_h=0.0
+&end
+

@@ -1,0 +1,8 @@
+&SystemSettings
+Nwalkers=100,TrotterOrder=2,HS=-1,dt=0.01, Maxsteps=1000, Dir='./', Nsamples=1,Shift=.true., Phaseless=.false., Local_energy=.false., PopContrlSteps=10, Maxshift=0.2, UpperBound=2d0, LowerBound=1d0
+&end
+
+&FHParams
+  Nsite=2, nup=1, ndo=1,Thop=1.0, U=0.5, Mu=0.25
+&end
+

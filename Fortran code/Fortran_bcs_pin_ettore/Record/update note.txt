@@ -10,3 +10,9 @@
 1.2Analytic: Add allopen BC for 1 band model (a)
 
 1.3: Add output of observables along every step and some control parameters at param.F90
+
+1.4: Add tprime model
+
+1.41: Add pinning-type
+
+1.42: Add Random Matrix Green Function Modification

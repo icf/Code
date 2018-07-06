@@ -1,0 +1,224 @@
+program main
+use prec
+use hubbard_param
+use lanc_param
+use flags_param
+use calphy_module
+use io_module
+
+implicit none
+
+integer:: nup, ndo 
+integer:: dim 
+real(kind=RKind):: gsenergy(noflow)
+integer::ns, ms 
+integer:: alloc_error
+
+real(kind=8),allocatable:: gsphi(:)
+complex(kind=8),allocatable:: phi_time(:), phi(:,:)
+
+real(kind=8):: Hlanc(lanc_size,lanc_size)
+complex(kind=8):: ExpHlanc(lanc_size,lanc_size)
+real(kind=8):: Eigenvalue(lanc_size)
+real(kind=8):: time,  res
+
+real(kind=8),allocatable:: denup(:), dendo(:)
+real(kind=8):: comup,comdo
+character(len=132):: BaseName,OccName,RadName
+integer:: i,j,k
+integer:: matsize
+real(kind=8):: Vextin
+integer(kind=4),external:: large_pickup
+
+
+NAMELIST /SystemSettings/ Nsite,nup,ndo,Maxtime,dt,Dir
+NAMELIST /FHParams/  Thop,U,Mu,Vextin
+
+OPEN(138,file='input')
+READ(138,SystemSettings)
+READ(138,FHParams)
+CLOSE(138)
+
+write(*, NML=SystemSettings)
+write(*, NML=FHParams)
+
+
+Nsmax=large_pickup(Nsite/2,Nsite)**2
+print *, 'Maximum subspace size', Nsmax
+
+
+if(invTable_flag==1) then 
+alloc_error=0
+allocate( invTable(0:2**(2*Nsite)-1), stat=alloc_error)
+if(alloc_error/=0) then
+print *, 'wrong in allocate invTable', alloc_error
+stop
+endif
+endif
+
+allocate(Tmn(Nsite,Nsite))
+allocate(Nstate(0:Nsite,0:Nsite))
+allocate(denup(Nsite))
+allocate(dendo(Nsite))
+
+
+
+ !--- assign the hopping matrix ----
+     Tmn=0.0_Rkind
+      do ns=1, Nsite-1 
+      Tmn(ns, ns+1)=1.0_RKind
+      enddo
+      !---------PBC----------------
+             !Tmn(1,Nsite)=1.0_RKind
+       
+  do ms=1, Nsite
+      do ns=1, ms-1   ! ns< ms 
+     Tmn(ms,ns)=Tmn(ns,ms)
+      enddo
+  enddo
+
+  Tmn=Tmn*Thop
+  
+
+call numstate1()    !produce Nstate(nup, ndo)
+!print *, nstate
+
+!=======================openmp initialize ==========================
+!$ call omp_set_num_threads(MAX_threads)
+
+!$omp parallel private(myid)
+!$  myid = OMP_GET_THREAD_NUM()
+!$  num_threads = OMP_GET_NUM_THREADS()
+!$  print *,'threads', myid, 'of',  num_threads,  'is alive'
+!$omp end parallel  
+
+!$ print *,'============================================='
+!=========================================================
+
+
+dim=nstate(nup, ndo)
+allocate(gsphi(dim))
+allocate(phi_time(dim))
+allocate(phi(lanc_size,dim))
+
+call sub_lanc(nup,ndo,dim,gsenergy,gsphi)
+print * ,nup,ndo,nstate(nup,ndo), gsenergy
+
+!----Applying the external potential 
+Vext=Vextin
+!---Copy initial state----------
+do k=1,dim
+phi_time(k)=gsphi(k)
+enddo 
+
+
+call createFileName(BaseName,Dir)
+call appendBaseName(BaseName,'FHED_')
+call appendBaseName(BaseName,'L',Nsite)
+call appendBaseName(BaseName,'nup',nup)
+call appendBaseName(BaseName,'ndo',ndo)
+
+call appendBaseName(BaseName,'NNt',2,Thop)
+call appendBaseName(BaseName,'U',2,U)
+call appendBaseName(BaseName,'Vext',2,Vext)
+
+
+call copyName(BaseName,RadName)
+call copyName(BaseName,occName)
+
+call appendBaseName(RadName,'Rad.dat')
+call appendBaseName(OccName,'Occ.dat')
+
+
+call openUnit(RadName,11)
+call openUnit(OccName,12)
+
+
+!--calculate physical quantities on phi_time
+call cal_den(dim, nup, ndo,phi_time, denup,dendo)
+
+do ns=1,Nsite
+print *, 'ns,nup,ndo', ns,denup(ns), dendo(ns)
+enddo 
+
+comup=0d0
+comdo=0d0
+do ns=1,Nsite
+comup=comup+ns*denup(ns)
+comdo=comdo+ns*dendo(ns)
+enddo 
+comup=comup/dble(nup)
+comdo=comdo/dble(ndo)
+
+time=0d0
+write(11,'(3f15.6)') time, comup,comdo
+
+do ns=1,Nsite
+write(12,'(1f15.6,i2,2f15.6)') time,ns,denup(ns),dendo(ns)
+enddo 
+write(12,*) '                       '
+
+
+
+
+do time =dt,Maxtime,dt
+
+!----perform lanczos on a give target state phi_time
+call sub_lancdynamics(nup, ndo, dim,phi_time,matsize, Hlanc,Phi)
+
+call reigen(Hlanc(1:matsize,1:matsize),matsize,eigenvalue(1:matsize))
+
+ DO i=1,matsize
+   DO j=1,matsize
+       ExpHlanc(i,j)=0.0_rKind
+         DO k=1,matsize
+ExpHlanc(i,j) = ExpHlanc(i,j) + Hlanc(i,k)*exp(-Xi*dt*EigenValue(k))*Hlanc(j,k)
+         END DO
+   END DO
+ END DO
+
+res=0d0
+phi_time=0d0
+do k=1, dim
+ do j=1, matsize
+    phi_time(k)=phi_time(k)+Phi(j,k)*ExpHlanc(j,1)
+ enddo 
+!print *, 'k', phi_time(k)
+res=res+abs(phi_time(k))**2
+enddo 
+
+
+!--calculate physical quantities on phi_time
+call cal_den(dim, nup, ndo,phi_time, denup,dendo)
+
+comup=0d0
+comdo=0d0
+do ns=1,Nsite
+comup=comup+ns*denup(ns)
+comdo=comdo+ns*dendo(ns)
+enddo 
+comup=comup/dble(nup)
+comdo=comdo/dble(ndo)
+
+print *, 'time,norm', time, res
+write(11,'(3f15.6)') time, comup,comdo
+
+do ns=1,Nsite
+write(12,'(1f15.6,i2,2f15.6)') time,ns,denup(ns),dendo(ns)
+enddo 
+write(12,*) '                       '
+
+enddo  ! end of time evolution 
+close(11)
+close(12)
+
+deallocate(gsphi)
+deallocate(phi_time)
+deallocate(phi)
+
+deallocate(Tmn)
+deallocate(Nstate)
+deallocate(denup)
+deallocate(dendo)
+
+end program main

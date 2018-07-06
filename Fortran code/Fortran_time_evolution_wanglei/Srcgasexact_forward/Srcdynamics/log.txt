@@ -1,0 +1,9 @@
+1.16 introduce invTable
+1.17 transfor to ivf, use omp
+1.18 further optimize the parallel alg
+     remove a bug assoatiate with Schmit orthognazation
+     add flags_param
+     remove ini_phi subroutine to save memory 
+     as an alterantive, reintroduce lookup mechanism, which is slow
+
+ 
