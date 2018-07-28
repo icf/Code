@@ -16,3 +16,5 @@
 1.41: Add pinning-type
 
 1.42: Add Random Matrix Green Function Modification
+
+1.5: Add smarter decomposition method £¨haven't apply£©(understand error, useless) ---> 1.44 (BCS Green Function generator work)
