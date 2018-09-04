@@ -1,0 +1,23 @@
+Userguide:
+step 1: When put the code in a new computer(Linux system),get into the dictionary:
+        [username pwd] chmod 744 compil clean
+step 2: Change the parameter in "param" and "hop", the detail of the parameter is 
+        write in "edhubbard.f90". 
+        [username pwd] vi edhubbard.f90
+		[username pwd] vi param
+        [username pwd] vi hop
+step 3: Compile the code
+        [username pwd] ./compil
+step 4: run the program
+        [username pwd] nohup ./lanh &
+step 5: see the process in nohup.out
+        [username pwd] vi nohup.out
+step 6: when the program is over, read the result in eigenvalue.dat and eigenstatei.dat
+step 7: get your data out, remove the useless information: lanh,*.dat,*.mod,*.out
+        [username pwd] ./clean
+
+ 
+
+update:
+       Just use Makefile to compile the code and run the code.
+         

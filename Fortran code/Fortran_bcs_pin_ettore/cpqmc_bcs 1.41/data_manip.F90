@@ -252,7 +252,13 @@ pi=acos(dble(-1.0))
 call get_filename()
 call openUnit(EnergyName,10,'R')
 !call openUnit(ZetaNName,11,'R')
-call openUnit(ObdmName,15,'R')
+!
+if (GM_input_flag .EQ. 1)then
+   call openUnit(ObdmName,15,'A')
+else
+   call openUnit(ObdmName,15,'R')
+endif
+!
 !call openUnit(ScorrName,20,'R')
 call openUnit(NcorrName,25,'A')
 call openUnit(SzcorrName,26,'A')
@@ -295,6 +301,12 @@ do i=0,max_n,1
 !   write(50,'(5f15.8)') pt,nu_t,nu_e,nd_t,nd_e
 
    if(I_obdm.eq.1)then
+!
+write(15,*)' '
+write(15,*)'step: ',sc_step_counter
+write(15,*)' '
+
+!
    do sitei=1,2*Nsite
      do sitej=1,2*Nsite
        call err_anal_complex(obdm_l(1:Nsamples,sitej,sitei,i),    &
@@ -303,11 +315,16 @@ do i=0,max_n,1
 !         write(15,'(2I4,3f15.8)')sitej,sitei,dble(zmean),aimag(zmean),err
 !       elseif(I_wavefun.eq.2)then 
          if(sitei.le.Nsite.and.sitej.le.Nsite)then
-           write(15,'(2I4,3f15.8)')sitej,sitei,dble(zmean),aimag(zmean),err
+!           write(15,'(2I4,3f15.8)')sitej,sitei,dble(zmean),aimag(zmean),err
+write(15,*)dble(zmean)
          elseif(sitei.gt.Nsite.and.sitej.gt.Nsite)then
-           write(15,'(2I4,3f15.8)')sitej,sitei,dble(zmean),aimag(zmean),err
+!           write(15,'(2I4,3f15.8)')sitej,sitei,dble(zmean),aimag(zmean),err
+write(15,*)dble(zmean)
+
          else
-           write(15,'(2I4,3f15.8)')sitej,sitei,0.d0,0.d0,0.d0
+!           write(15,'(2I4,3f15.8)')sitej,sitei,0.d0,0.d0,0.d0
+write(15,*)0.d0
+
          endif
 !       endif
      enddo
@@ -440,8 +457,8 @@ do i=0,max_n,1
       enddo
    end do
    do sitei=1,Nsite,1
-      write(80,*) 1-abs(cicj_sc_global(sitei,sitei))-abs(cicj_sc_global(sitei+Nsite,sitei+Nsite))
-      write(90,*) abs( cicj_sc_global(sitei,sitei)-cicj_sc_global(sitei+Nsite,sitei+Nsite) )/2.d0
+      write(80,*) 1-real(cicj_sc_global(sitei,sitei))-real(cicj_sc_global(sitei+Nsite,sitei+Nsite))
+      write(90,*) real( cicj_sc_global(sitei,sitei)-cicj_sc_global(sitei+Nsite,sitei+Nsite) )/2.d0
    enddo
 
 end do
