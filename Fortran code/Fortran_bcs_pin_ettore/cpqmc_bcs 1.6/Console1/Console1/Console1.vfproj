@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectCreator="Intel Fortran" Keyword="Console Application" Version="11.0" ProjectIdGuid="{3E4D6577-EB7E-4229-926D-D527192046A6}">
+	<Platforms>
+		<Platform Name="Win32"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" WarnInterfaces="true" Traceback="true" BoundsCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" RuntimeLibrary="rtMultiThreadedDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
+		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath="..\..\adjustET.F90"/>
+		<File RelativePath="..\..\back_propagation.F90"/>
+		<File RelativePath="..\..\backup_phi.F90"/>
+		<File RelativePath="..\..\bcs_green_pure.F90"/>
+		<File RelativePath="..\..\bcs_update.F90"/>
+		<File RelativePath="..\..\caldet.F90"/>
+		<File RelativePath="..\..\cpmc.F90"/>
+		<File RelativePath="..\..\data_manip.F90"/>
+		<File RelativePath="..\..\dynamics.F90"/>
+		<File RelativePath="..\..\file_name.F90"/>
+		<File RelativePath="..\..\green_holes.F90"/>
+		<File RelativePath="..\..\green_particles.F90"/>
+		<File RelativePath="..\..\green_particles_commented.F90"/>
+		<File RelativePath="..\..\HF.F90"/>
+		<File RelativePath="..\..\initial_end.F90"/>
+		<File RelativePath="..\..\initial_kv.F90"/>
+		<File RelativePath="..\..\initial_phi.F90"/>
+		<File RelativePath="..\..\initial_phiT.F90"/>
+		<File RelativePath="..\..\io_module.F90"/>
+		<File RelativePath="..\..\lattice_inform.F90"/>
+		<File RelativePath="..\..\main-t.F90"/>
+		<File RelativePath="..\..\main.F90"/>
+		<File RelativePath="..\..\matrix_cpmc.F90"/>
+		<File RelativePath="..\..\matrix_dc.F90"/>
+		<File RelativePath="..\..\matrixcal.F90"/>
+		<File RelativePath="..\..\meas_cicj.F90"/>
+		<File RelativePath="..\..\meas_htwo.F90"/>
+		<File RelativePath="..\..\meas_ninj.F90"/>
+		<File RelativePath="..\..\meas_pairing.F90"/>
+		<File RelativePath="..\..\meas_sisj.F90"/>
+		<File RelativePath="..\..\measure.F90"/>
+		<File RelativePath="..\..\measure_dynamics.F90"/>
+		<File RelativePath="..\..\measure_energy.F90"/>
+		<File RelativePath="..\..\measure_two_body_beta.F90"/>
+		<File RelativePath="..\..\modified_GS.F90"/>
+		<File RelativePath="..\..\old_bcs_green_pure.F90"/>
+		<File RelativePath="..\..\params.F90"/>
+		<File RelativePath="..\..\population.F90"/>
+		<File RelativePath="..\..\print_observables.F90"/>
+		<File RelativePath="..\..\rcpmc.F90"/>
+		<File RelativePath="..\..\response_functions.F90"/>
+		<File RelativePath="..\..\sprng_rndm.F90"/>
+		<File RelativePath="..\..\step_qmc.F90"/>
+		<File RelativePath="..\..\timing_module.F90"/>
+		<File RelativePath="..\..\update.F90"/>
+		<File RelativePath="..\..\x-hf.F90"/></Filter></Files>
+	<Globals/></VisualStudioProject>

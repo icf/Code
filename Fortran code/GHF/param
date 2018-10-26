@@ -1,0 +1,19 @@
+2        !set:1 by hand 2 TBC
+9      !Nsite->set=1
+36       !Nhop->set=1
+2    #Dimen->set/=1
+20        !Nl(1)->set/=1 & Dimen>=1
+20        !Nl(2)->set/=1 & Dimen>=2
+2        !Nl(3)->set/=1 & Dimen=3
+0.3843d0    !kbound(1)->set=3 & Dimen>=1
+0.9840d0    !kbound(2)->set=3 & Dimen>=2
+0.d0    !kbound(3)->set=3 & Dimen>=3
+(-1.d0,0.d0)  !t1 Hubbard hopping t1 in nearest direction.
+2.d0     !onsitU Hubbard U interaction on the same site.
+400       !Ntot the up spin and down spin particle numbers
+c      !dtype for the determinate type: d decouple, c couple.
+200     !Nspin(1) means Nup
+200     !Nspin(2) means Ndn
+0.00d0       !order parameter min
+0.90d0       !order parameter max 
+0.01d0      !order parameter add

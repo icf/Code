@@ -18,3 +18,16 @@
 1.42: Add Random Matrix Green Function Modification
 
 1.5: Add smarter decomposition method £¨haven't apply£©(understand error, useless) ---> 1.44 (BCS Green Function generator work)
+
+1.5: correct B.C. for t_prime model
+
+1.6: add GHF as an initial trial wave function option
+Attention:
+1) coupled form is forced into decoupled form at BCS part
+
+1.61: allow dtype="couple" for pBCS (tring at 1.7)
+
+1.7: start from 1.6 and add coupled form for BCS 
+Attention: 
+1)  the difference between A in Green and overlap 
+2) the decoupled form is not checked 

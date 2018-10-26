@@ -1,0 +1,224 @@
+1c1
+< subroutine green_particles()
+---
+> subroutine green_holes()
+20c20
+< complex(kind=8)::GreenPm_t(0:Nbeta)
+---
+> complex(kind=8)::GreenHm_t(0:Nbeta)
+24c24
+< complex(kind=8),allocatable::GreenP_t_local(:,:)
+---
+> complex(kind=8),allocatable::GreenH_t_local(:,:)
+56c56
+< allocate(GreenP_t_local(0:Nbeta,Dtot))
+---
+> allocate(GreenH_t_local(0:Nbeta,Dtot))
+64c64
+<       read(10,*)Qx,Qy  
+---
+>       read(10,*)Qx,Qy
+93a94
+> 
+104c105
+< GreenPm_t=zero
+---
+> GreenHm_t=zero
+134c135
+<  !make it orthogonal to other orbitals
+---
+>  !only the component in the linear span phi_r_1, ..., phi_r_N will survive
+150c151
+<     mu_tilde(j)=mu(j)
+---
+>     mu_tilde(j)=zero
+152c153
+<       mu_tilde(j)=mu_tilde(j)-proj(ip)*phR(j,ip)
+---
+>       mu_tilde(j)=mu_tilde(j)+proj(ip)*phR(j,ip)
+155,156c156,158
+<   normr=dsqrt(dble(zdotc(2*Nsite,mu_tilde,1,mu_tilde,1)))
+<   norm=dcmplx(normr,0.d0)  
+---
+> 
+> !  normr=dsqrt(dble(zdotc(2*Nsite,mu_tilde,1,mu_tilde,1)))
+> !  norm=dcmplx(normr,0.d0)  
+158,165c160,167
+<   if(normr.lt.0.0000000001)then
+<     MuBeta(:,0)=zero
+<     dnpu(0)=zero
+<   else 
+<     mu_tilde(:)=mu_tilde(:)/norm
+<     MuBeta(:,0)=mu_tilde(:)
+<     dnpu(0)=zdotc(2*Nsite,mu_tilde,1,mu,1)
+<   endif 
+---
+> !  if(normr.lt.0.0000000001)then
+> !    MuBeta(:,0)=zero
+> !    dnpu(0)=zero
+> !  else 
+> !    mu_tilde(:)=mu_tilde(:)/norm
+>    MuBeta(:,0)=mu_tilde(:)
+> !    dnpu(0)=zdotc(2*Nsite,mu_tilde,1,mu,1)
+> !  endif 
+202c204
+<     call propagate_orbital(mu_temp,i_beta,i)
+---
+>     call propagate_orbital_backword(mu_temp,i_beta,i)
+222c224
+<       mu_tilde(j)=mu_temp(j)
+---
+>       mu_tilde(j)=zero
+225c227
+<         mu_tilde(j)=mu_tilde(j)-proj(ip)*phRbeta(j,ip,i_beta)
+---
+>         mu_tilde(j)=mu_tilde(j)+proj(ip)*phRbeta(j,ip,i_beta)
+228,229c230,231
+<     normr=dsqrt(dble(zdotc(2*Nsite,mu_tilde,1,mu_tilde,1)))
+<     norm=dcmplx(normr,0.d0)
+---
+> !    normr=dsqrt(dble(zdotc(2*Nsite,mu_tilde,1,mu_tilde,1)))
+> !    norm=dcmplx(normr,0.d0)
+231,235c233,237
+<     if(normr.lt.0.0000000001)then
+<       MuBeta(:,i_beta)=zero
+<       dnpu(i_beta)=zero
+<     else
+<       mu_tilde(:)=mu_tilde(:)/norm
+---
+> !    if(normr.lt.0.0000000001)then
+> !      MuBeta(:,i_beta)=zero
+> !      dnpu(i_beta)=zero
+> !    else
+> !      mu_tilde(:)=mu_tilde(:)/norm
+237,238c239,240
+<       dnpu(i_beta)=zdotc(2*Nsite,mu_tilde,1,mu_temp,1)*dnpu(i_beta-1)
+<     endif
+---
+> !      dnpu(i_beta)=zdotc(2*Nsite,mu_tilde,1,mu_temp,1)*dnpu(i_beta-1)
+> !    endif
+287a290
+> !evaluate projections <phi_l_i | mu_0 >
+289,290c292,293
+<         ui(:)=phRbeta(:,ip,i_beta)
+<         projr(ip)=zdotc(2*Nsite,mu0,1,ui,1)
+---
+>         ui(:)=phL(:,ip,k)
+>         projl(ip)=zdotc(2*Nsite,ui,1,mu0,1)
+293c296
+< !        write(*,*)'<mu0 | phRbeta > ',ip, projr(ip)
+---
+> !        write(*,*)'<phL | mu0> ',ip, projl(ip)
+299,300c302,303
+<         ui(:)=phL(:,ip,k)
+<         projl(ip)=zdotc(2*Nsite,ui,1,mu_temp,1)
+---
+>         ui(:)=phRbeta(:,ip,i_beta)
+>         projr(ip)=zdotc(2*Nsite,mu_temp,1,ui,1)
+303c306
+< !        write(*,*)'<phL | mu> ',ip, projl(ip)
+---
+> !        write(*,*)'<MuBeta | phRbeta > ',ip, projr(ip)
+307,311d309
+<       proj0=zdotc(2*Nsite,mu0,1,mu_temp,1)
+< !DEBUG-------------------------------------------------
+< !      write(*,*)'<mu0 | mu >',proj0
+< !DEBUG-------------------------------------------------
+< 
+323c321
+<       GreenP_t_local(i_beta,k)=dnpu(i_beta)*(proj0-c00)
+---
+>       GreenH_t_local(i_beta,k)=c00
+333d330
+< !   stop 'DEB'
+336c333
+< !      write(98,*)i_beta*dt,dble(GreenP_t_local(i_beta,1))
+---
+> !      write(*,*)i_beta*dt,dble(GreenH_t_local(i_beta,1))
+338,345c335,341
+< !    write(98,*)
+< !    write(98,*)
+< !  enddo
+< !  write(98,*)
+< !  write(98,*)
+< !  write(98,*)'######################################'
+< !  write(98,*)
+< !  write(98,*)
+---
+> !    write(*,*)
+> !    write(*,*)
+> !  write(*,*)
+> !  write(*,*)
+> !  write(*,*)'######################################'
+> !  write(*,*)
+> !  write(*,*)
+350,356d345
+< !  do i_beta=0,Nbeta,1
+< !    do sitei=1,2*Nsite,1
+< !      call add_numerator(i,imp_local(1,i_beta),tot_local(i_beta),                  &
+< !             coe,w_meas,tot_meas,rho_t_local(sitei,i_beta,1:Dtot),rhom_t(sitei,i_beta))
+< !    enddo
+< !  enddo
+< 
+359c348
+<              coe,w_meas,tot_meas,GreenP_t_local(i_beta,1:Dtot),GreenPm_t(i_beta))
+---
+>              coe,w_meas,tot_meas,GreenH_t_local(i_beta,1:Dtot),GreenHm_t(i_beta))
+374,379c363
+< !do i_beta=0,Nbeta,1
+< !  do sitei=1,Nbravais,1
+< !    call MPI_ALLREDUCE(rhom_t(sitei,i_beta),tmp,1,MPI_DOUBLE_COMPLEX,MPI_SUM,MPI_COMM_WORLD,IERR)
+< !    rhom_t(sitei,i_beta)=tmp
+< !  enddo
+< !enddo
+---
+> 
+381,382c365,366
+<     call MPI_ALLREDUCE(GreenPm_t(i_beta),tmp,1,MPI_DOUBLE_COMPLEX,MPI_SUM,MPI_COMM_WORLD,IERR)
+<     GreenPm_t(i_beta)=tmp
+---
+>     call MPI_ALLREDUCE(GreenHm_t(i_beta),tmp,1,MPI_DOUBLE_COMPLEX,MPI_SUM,MPI_COMM_WORLD,IERR)
+>     GreenHm_t(i_beta)=tmp
+387,392d370
+< !do i_beta=0,Nbeta,1
+< !  do sitei=1,Nbravais,1
+< !    RHO_one(sitei,i_beta)=rhom_t(sitei,i_beta)/denominator
+< !  enddo
+< !enddo
+< 
+394,395c372,373
+<     GreenP_one(i_beta)=GreenPm_t(i_beta)/denominator
+< !    write(98,*)i_beta*dt,GreenP_one(i_beta)
+---
+>     GreenH_one(i_beta)=GreenHm_t(i_beta)/denominator
+> !    write(98,*)i_beta*dt,GreenH_one(i_beta)
+398c376
+< deallocate(GreenP_t_local)
+---
+> deallocate(GreenH_t_local)
+401c379
+< end subroutine green_particles
+---
+> end subroutine green_holes
+407c385
+< subroutine propagate_orbital(orb_mu,i_beta,i_walker)
+---
+> subroutine propagate_orbital_backword(orb_mu,i_beta,i_walker)
+429c407
+< call zgemm('N','N',2*Nsite,1,2*Nsite,one,exp_halfK,2*Nsite,mu_temp,2*Nsite,zero,orb_mu,2*Nsite)
+---
+> call zgemm('N','N',2*Nsite,1,2*Nsite,one,exp_mhalfK,2*Nsite,mu_temp,2*Nsite,zero,orb_mu,2*Nsite)
+441,442c419,420
+<   orb_mu(j)=orb_mu(j)            *(explr_up+one)
+<   orb_mu(j+Nsite)=orb_mu(j+Nsite)*(explr_dn+one)
+---
+>   orb_mu(j)=orb_mu(j)            /(explr_up+one)
+>   orb_mu(j+Nsite)=orb_mu(j+Nsite)/(explr_dn+one)
+446c424
+< call zgemm('N','N',2*Nsite,1,2*Nsite,one,exp_halfK,2*Nsite,mu_temp,2*Nsite,zero,orb_mu,2*Nsite)
+---
+> call zgemm('N','N',2*Nsite,1,2*Nsite,one,exp_mhalfK,2*Nsite,mu_temp,2*Nsite,zero,orb_mu,2*Nsite)
+449c427
+< end subroutine propagate_orbital
+---
+> end subroutine propagate_orbital_backword
