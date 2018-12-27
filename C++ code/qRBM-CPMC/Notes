@@ -1,0 +1,6 @@
+For 
+qRBM 1.0: The commutator is important and symmetry "A^T=A" may cancel the commutator.
+
+qRBM 1.1: using Numerical Derivative.
+
+qRBM 1.2: qRBM --> CPMC , for input_phiT from file (In S.C. CPMC force it to be canceled at the second step)

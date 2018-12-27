@@ -1,0 +1,39 @@
+We use IBITS() to get the binary number in computer, can be 3~7 faster. ----2010.7.11  (discuss with Zhenhua Li)
+Pay attention: The code cannot deal with the condition when lattice number is larger or equal than 31.
+The version nompi2.0 may be able to do it.
+Nompi1.1 use the (sign integer number+1) to represent the Basis, so maybe cannot deal Nlattice=31,fixed by subtract 1 --!2010.7.22
+If the lattice size is little or equal than 31, use 1.2; large than 31 use 2.0-------2010.11.11
+We add the NlanMmin,NlanMmax,Lanadd,Nlanmatrix_set to change the LanM dynamically.----2010.11.11
+
+Add the meas.f90 to measure Kin and V of the hamiltonian.---2011.2.1
+Change to use makefile,and set the name depend on param.---2011.2.1
+
+Try to use the new label method.------2011.4.5
+
+Change the code to the new standard form.-----2011.4.16
+
+
+keep in mind that when Nhilbert space is larger than 2**31, the lapack or blas routine when need to use Nhilbert should be changed.
+
+Add cycle U in main_cycle_U.f90. keep in mind it can be only used when Nei=1---2011.425
+
+Add the expectation value of <(Si^z)*(Sj^z)> and <(Di^+)*Dj> in measure-----2011.09.11
+
+Add measure S^2 in the measurement.---------2011.11.13
+
+Add measure k point,and project k point.---2011.11.16
+
+When we calculate the excited state, do not orthogonalize in each step. keep in mind it must orthogonalize in first step of lanczos, because the first step will always cause the large numerical error.---2011.11.17
+
+Change to the new Htowf version, and make lanczos matrix twice to reduce the memory.---2012.05.02
+We change the S^2towf and Ttowf as Htowf, it will be more power in parall version, and the Tmatrix is changed to inverse translation
+version.---2012.05.02
+
+Change the new label method, and store the <iup|Hup|jup> with <idn|Hup|jdn>.-----2012.05.04
+
+Change the converge condition to variational energy, we can choose different converge condition.-----2012.05.09
+
+There is a bug in calculate the K, T_r|phi>=exp(-i*k*r)|phi>, we miss a minus sign in exponential.==> While we need the fourier
+transformation be: c^{+}_{k}=1/N sum_{i} exp(i*k*r) c_r^{+}|0>----2012.05.24
+
+Add <ci^{+}cj> mean values and the fourier transformations.---2012.09.24

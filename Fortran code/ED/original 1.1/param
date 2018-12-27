@@ -1,0 +1,33 @@
+3  !set:1 by hand 2 PBC 3 TBC with tprime
+9  !Nlattice->set=1
+36  !Nhop->set=1
+2  !Dimen->set/=1
+4  !Nl(1)->set/=1 & Dimen>=1
+4  !Nl(2)->set/=1 & Dimen>=2
+1  !Nl(3)->set/=1 & Dimen=3
+0.d0  !kbound(1)->set=3 & Dimen>=1
+0.d0  !kbound(2)->set=3 & Dimen>=2
+0.d0  !kbound(3)->set=3 & Dimen>=3
+N         !PS for project S,'Y' or 'N'
+N         !PK for project K,'Y' or 'N'
+0    !two_rSS useually is ABS(Nup-Ndn)
+0    !k_keep(1)->Dimen>=1
+0    !k_keep(2)->Dimen>=2
+0    !k_keep(3)->Dimen=3
+3  !Nup
+3  !Ndown
+(-1.d0,0.d0)  !kin
+(-0.d0,0.d0)  !tprime
+8.d0  !onsitU
+10  !LanM
+10 !LanMmin
+50 !LanMmax
+10  !Lanadd
+10 !Nlanmatrix_set
+E !conv E or W converge of energy or wave function
+5.d-10  !lit define Nlan
+1.d-2  !lim define orthogonalize,project symmetry
+1  !Nexcit-->excite state
+0  !wstate-->1 write,0-->not write
+1  !pinningtype 1: +-|-+ (only work for TBC)
+(0,0) !Hpinn !(only work for TBC)

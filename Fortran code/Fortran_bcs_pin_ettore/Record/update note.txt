@@ -25,9 +25,12 @@
 Attention:
 1) coupled form is forced into decoupled form at BCS part
 
-1.61: allow dtype="couple" for pBCS (tring at 1.7)
+1.61: allow dtype="couple" for pBCS (trying at 1.7)
 
 1.7: start from 1.6 and add coupled form for BCS 
 Attention: 
 1)  the difference between A in Green and overlap 
 2) the decoupled form is not checked 
+
+Error in Density
+1) try to find the behavior of error in Analytic pBCS SC CPMC from 1.6
