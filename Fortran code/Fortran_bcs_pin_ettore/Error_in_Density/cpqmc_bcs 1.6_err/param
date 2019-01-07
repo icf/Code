@@ -53,4 +53,4 @@ BK       !fw_bk FW means no back propogation,BK means back propogation.
 1      !sc_initial_choose  1, 2, 3:free electrons, UHF, GHF; 
 1      !GM_input_flag  GM input: GM_input_flag=1 at second step; 
 1      !sc_loop_num
-2      !decMethod  1:DET; 2:Analytic with FE initial
+1      !decMethod  1:DET; 2:Analytic with FE initial

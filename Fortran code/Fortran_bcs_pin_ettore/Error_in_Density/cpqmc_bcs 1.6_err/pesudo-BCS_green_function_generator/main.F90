@@ -8,13 +8,11 @@ complex(kind=8)::value,sum_green
 
 !set lattice
 Nsite=16
-Nspin=7
+Nspin=3
 
-call FAC(Nsite-1,fac_Nsite)
-call FAC(Nspin-1,fac_Nspin)
-call FAC(Nsite-Nspin,fac_NN)
+call FNC(total_num,Nsite,Nspin)
 
-total_num=fac_Nsite/(fac_Nspin*fac_NN)
+write(*,*)"watch out!!! fac_Nsite may limited by int_size --> results for 4*I4"
 
 allocate(mark(Nsite-1))
 allocate(set(Nsite-1))
@@ -27,6 +25,7 @@ allocate(green(Nsite))
 !        write(10,*)pBCS(i)
 !end do
 !close(10)
+
 pBCS(1)=      2.0027441349543061E-002
 pBCS(2)=    3.8298655004720572E-002
 pBCS(3)=    4.5667145993058413E-002
@@ -42,14 +41,66 @@ pBCS(12)=   0.88629295354583792
 pBCS(13)=   0.90727229377100671     
 pBCS(14)=   0.90727229377100671    
 pBCS(15)=   0.90727229377100671     
-pBCS(16)=   0.90727229377100671
+pBCS(16)=   0.90727229377100671  
 
+!4477u=8 t0.01t0.02
+pBCS(1)=       8.2944186404347406E-002
+pBCS(2)=    0.13340081421483782 
+pBCS(3)=    0.13344510870228987     
+pBCS(4)=   0.13406325275718692 
+pBCS(5)=    0.13425567229569418 
+pBCS(6)=    0.16270273365080343    
+pBCS(7)=  0.16380146332085119      
+pBCS(8)=   0.44535609427839512    
+pBCS(9)=   0.48102344479411840   
+pBCS(10)=  0.51840202230960142    
+pBCS(11)=  0.55101049225777377    
+pBCS(12)=   0.79222764300357107     
+pBCS(13)=    0.79428524007380519    
+pBCS(14)=   0.79738870407163664    
+pBCS(15)=   0.79839155969966680     
+pBCS(16)=   0.87730109132826306
 
+!4433u=8
+pBCS(1)=   2.3042412541613433E-003
+pBCS(2)=   4.9857982158276783E-003
+pBCS(3)=   4.9857982165344584E-003
+pBCS(4)=   4.9857982169589461E-003
+pBCS(5)=   4.9857982176932346E-003
+pBCS(6)=   1.0081847122723760E-002
+pBCS(7)=   1.0081847125658964E-002
+pBCS(8)=   1.0081847128341504E-002
+pBCS(9)=   1.0081847129364723E-002
+pBCS(10)=   1.0081847132195921E-002
+pBCS(11)=   1.0081847134661363E-002
+pBCS(12)=  0.49555768629773750     
+pBCS(13)=  0.49555768676740131     
+pBCS(14)= 0.49555768737821226     
+pBCS(15)=  0.49555768784792076     
+pBCS(16)=  0.93503073481453436 
+
+!4433u=8 VMpBCS
+pBCS(1)=   0.0014307
+pBCS(2)=   0.00585041
+pBCS(3)=   0.00585041
+pBCS(4)=   0.00585041
+pBCS(5)=  0.00585041
+pBCS(6)=   0.0129616
+pBCS(7)=   0.0129616
+pBCS(8)=   0.0129616 
+pBCS(9)=   0.0129616
+pBCS(10)=   0.0129616
+pBCS(11)=   0.0129616
+pBCS(12)=  0.495647     
+pBCS(13)=  0.495647     
+pBCS(14)= 0.495647      
+pBCS(15)=  0.495647     
+pBCS(16)=  0.930912
 
 do i=1,Nsite
    pBCS(i)=pBCS(i)/abs(1-pBCS(i))
+   pBCS(i)=sqrt(pBCS(i))
    write(*,*)pBCS(i)
-   !pBCS(i)=sqrt(pBCS(i))
 enddo
 
 green=0
@@ -123,9 +174,9 @@ complex(kind=8)::value
 complex(kind=8)::pBCS(Nsite)
 complex(kind=8)::mark(Nsite-1),set(Nsite-1)
 
-value=pBCS(i)
+value=pBCS(i)**2
 do j=1,Nsite-1
-   if(mark(j) .EQ. 1)value=value*set(j)
+   if(mark(j) .EQ. 1)value=value*set(j)**2
 enddo
 
 end subroutine get_mark_value
@@ -176,6 +227,22 @@ enddo
 
 end subroutine FAC
 
+subroutine FNC(f, Nsite, Nspin)
+
+implicit none
+integer:: i,f,Nsite,Nspin
+real(kind=8):: fr
+
+   fr=1
+   do i=1,Nsite-1
+      fr=fr*real(i)
+      if(i .LE. Nspin-1)fr=fr/real(i);
+      if(i .LE. Nsite-Nspin)fr=fr/real(i);
+   enddo
+
+f=int(fr)
+
+end subroutine FNC
 
 
 

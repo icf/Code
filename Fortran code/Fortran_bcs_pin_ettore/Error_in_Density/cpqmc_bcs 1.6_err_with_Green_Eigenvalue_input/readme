@@ -1,0 +1,38 @@
+boruoshihao: boruoshihao@gmail.com   2012.11.19
+   I'm going to write a QMC code which is able to calculate the general Hamiltionain(Spin-orbit Coupling). This code will also enable us to use the spin symmetrical try wave function. This code will remain the capability of Constraint-Path Quantumn Monte Carlo, Free-Projection Quantumn Monte Carlo and Release-Constraint Quantumn Monte Carlo. I will also try to improve the code developed before, try to make the part of the code more independently, use less module file. 
+  This will be a attemption to use git. Readme file will be the record of the most important commit.
+
+boruoshihao:boruoshihao@gmail.com 2013.01.08
+   We need to keep in mind: phi(2*Nsite,Ntot,Nwalkers)  2*Nsite*Ntot*Nwalkers< (2^31-1)
+                            impfunc_tmp(Dtot,Nwalkers)  Dtot,Nwalkers<(2*31-1)
+                            Amat(2*Nsite,2*Nsite,Dtot)  2*Nsite*2*Nsite*Dtot<(2*31-1)
+                            back_store(Nsite,Nstps_fwd,Nwalkers) Nsite*Nstps_fwd*Nwalkers<(2*31-1)
+                            htype:4*Nsite*Nsite*16<(2^31-1)
+   updat the new population control methods, avoid the multi message expression.
+   change the free projection dtf, abort temporarily.
+
+
+Need to optimize the code:
+1. Calculate the determinat with the inverse together, we can save time here(in measurement and K V update)!/change the lwork for
+compare==>done
+
+2. Change the preprocessing in define==>done
+
+3. Change the population control part==>done
+
+4. Change the update part, use the information in calculate the greens function part.==>done
+
+5. write all the code by professional notes.
+
+6. Modified the GS code by shiwei.
+
+7. Update the population control part: use the parent when make the population contrl.
+
+8. How to use openmp in positron of cpmc?
+
+9. Check all the zgemm to see whether we can use blas 2 level code to run them.
+
+10. Add fftw to the K to phi part.
+
+
+I also add the importrant sampling code in free projection and release, it looks like the result is not good! So try to go back with the old code saved here!==> Add a new important sampling.

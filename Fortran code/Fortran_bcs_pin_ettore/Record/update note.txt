@@ -34,3 +34,4 @@ Attention:
 
 Error in Density
 1) try to find the behavior of error in Analytic pBCS SC CPMC from 1.6
+2) add VMpBCS and several tools to understand the error in pBCS CPMC

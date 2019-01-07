@@ -186,6 +186,7 @@ do l=1,Nsite
   enddo
 enddo
 
+
 end subroutine bcs_green_pure
 
 

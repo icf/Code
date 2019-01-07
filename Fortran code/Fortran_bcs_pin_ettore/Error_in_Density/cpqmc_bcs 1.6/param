@@ -2,8 +2,8 @@
 9      !Nsite->set=1
 36       !Nhop->set=1
 2      !Dimen->set/=1
-2         !Nl(1)->set/=1 & Dimen>=1
-2        !Nl(2)->set/=1 & Dimen>=2
+4         !Nl(1)->set/=1 & Dimen>=1
+4        !Nl(2)->set/=1 & Dimen>=2
 1         !Nl(3)->set/=1 & Dimen=3
 0.d0   !kbound(1)->set=3 & Dimen>=1
 0.d0    !kbound(2)->set=3 & Dimen>=2
@@ -31,8 +31,8 @@ S        !dcp The decouple method:'S' or 'C'
 BK       !fw_bk FW means no back propogation,BK means back propogation.
 0        !Nbk(1) is the free projection path
 80       !Nbk(2) is the constraint path
-5      !Nsamples number of sampling do we need in MC process.
-200        !Nwalkers number of  walkers
+1      !Nsamples number of sampling do we need in MC process.
+100        !Nwalkers number of  walkers
 1        !blockstep Block number which inidcate the basic size
 200      !Thermblock number of blocks do we need in thermal process.
 5       !Neqblock  number of blocks do we need in equilibrium step(update and measure)

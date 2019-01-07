@@ -686,6 +686,7 @@ call eigen(cicj_sc_global_dn,Nsite,ev_dn)
  close(82)
  close(83)
  close(84)
+
 !-----------------------------------------
 !-----------------------------------------
 !get BCS_SC
