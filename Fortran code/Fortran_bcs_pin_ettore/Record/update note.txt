@@ -35,3 +35,18 @@ Attention:
 Error in Density
 1) try to find the behavior of error in Analytic pBCS SC CPMC from 1.6
 2) add VMpBCS and several tools to understand the error in pBCS CPMC
+
+update Error in Density
+1)correct the way to generate Density function in "cicj_sc_global_input_generator2"
+
+2.0
+add pBCS_phase and the following variational method
+
+2.1
+start with random phase and show the real_limit in LOG
+
+2.2
+add t_prime and pinnning
+
+2.3
+Add Min_cho (make sure mixed estimator variation is convinced with pure estimator one)

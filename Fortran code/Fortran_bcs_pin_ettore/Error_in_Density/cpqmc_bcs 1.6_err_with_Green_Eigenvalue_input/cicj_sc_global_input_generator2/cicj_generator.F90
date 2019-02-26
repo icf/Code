@@ -72,19 +72,19 @@ rho(15+1)=(3.9800059213273994e-02  , -5.6444509146797513e-04)
 
 
 cicj_sc_global=0
+do i=1,Nsitex
+do j=1,Nsitey  !the standard point
+   do sitex=1,Nsitex
+      do sitey=1,Nsitey  
 
-do sitex=1,Nsitex
-do sitey=1,Nsitey  !the standard point
-   do i=1,Nsitex
-      do j=1,Nsitey
-         if(i-sitex .GE. 0 .AND. j-sitey .GE. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
-&=rho(i-sitex+(j-sitey)*Nsitex +1) 
-         if(i-sitex .LT. 0 .AND. j-sitey .GE. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
-&=rho(i-sitex+4+(j-sitey)*Nsitex +1) 
-         if(i-sitex .GE. 0 .AND. j-sitey .LT. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
-&=rho(i-sitex+(j-sitey+4)*Nsitex +1) 
-         if(i-sitex .LT. 0 .AND. j-sitey .LT. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
-&=rho(i-sitex+4+(j-sitey+4)*Nsitex +1) 
+         if(sitex-i .GE. 0 .AND. sitey-j .GE. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
+&=rho(sitex-i+(sitey-j)*Nsitex +1) 
+         if(sitex-i .LT. 0 .AND. sitey-j .GE. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
+&=rho(sitex-i+4+(sitey-j)*Nsitex +1) 
+         if(sitex-i .GE. 0 .AND. sitey-j .LT. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
+&=rho(sitex-i+(sitey-j+4)*Nsitex +1) 
+         if(sitex-i .LT. 0 .AND. sitey-j .LT. 0)cicj_sc_global(i+(j-1)*Nsitex,sitex+(sitey-1)*Nsitex) &
+&=rho(sitex-i+4+(sitey-j+4)*Nsitex +1) 
       enddo
    enddo
 enddo
