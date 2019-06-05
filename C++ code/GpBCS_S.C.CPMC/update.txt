@@ -1,1 +1,8 @@
-3.1 change the VM form (S.C. GHF-GpBCS CPMC only depend on Denisty Matrix Now)
+3.0£º
+Bug fix
+1) The GreenMatrix are a sum of all measurement steps not only one.
+ 
+New Feature 
+
+1) Save All PhiT after each iteration and allow to readPhiT at first. (code can now restart at any iteration step)
+2) Save All GreenMatrix and Errorbar. 
