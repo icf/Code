@@ -60,6 +60,10 @@ class AfqmcConstraintPath
     //cut line flag
     bool cutMinus;
 
+    //icf: get the energy and green matrix after one CPMC 
+    TensorHao<std::complex<double>, 2> greenMatrixAfterCPMC;  
+    void resetAndSaveGreenMatrix();
+
  private:
     void initialPhiT();
     void initialSCPhiT();

@@ -1,0 +1,5 @@
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_original_2_Ettore_BP_GHF/build/CMakeFiles/rebuild_cache.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_original_2_Ettore_BP_GHF/build/CMakeFiles/afqmcConstraintPath.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_original_2_Ettore_BP_GHF/build/CMakeFiles/test.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_original_2_Ettore_BP_GHF/build/CMakeFiles/rmdat.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_original_2_Ettore_BP_GHF/build/CMakeFiles/edit_cache.dir

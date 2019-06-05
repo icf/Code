@@ -1,0 +1,5 @@
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/BCSHubbard/build/CMakeFiles/rebuild_cache.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/BCSHubbard/build/CMakeFiles/bcs.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/BCSHubbard/build/CMakeFiles/edit_cache.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/BCSHubbard/build/CMakeFiles/rmdat.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/BCSHubbard/build/CMakeFiles/test.dir

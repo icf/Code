@@ -58,6 +58,7 @@ void GpBCS_VM::set(MatrixXcd& target_dm_, MatrixXcd& eigenvalues, MatrixXcd& eig
        
        Ghf ghf;
        TensorHao<complex<double>, 2> T_hao=ghf.run();      //icf: we have the error of MPI, need to discuss with Hao
+
        for(int i=1-1;i<=2*Nsite-1;i++){
        for(int j=1-1;j<=2*Nsite-1;j++){
           T(i,j)=T_hao(i,j);
@@ -302,8 +303,7 @@ double GpBCS_VM::get_mixed_energy(VectorXi& mark)
    {
        Venergy += U(i) * ( greenMatrix(i,i)*greenMatrix(i+L,i+L) - greenMatrix(i, i+L)*greenMatrix(i+L, i) );
        Venergy += U(i) * (-1.0* cpcpMatrix(i,i+L)*cmcmMatrix(i,i+L) );
-   }
-
+   } 
    double energy = real( Kenergy + Venergy );
    return energy;
 }

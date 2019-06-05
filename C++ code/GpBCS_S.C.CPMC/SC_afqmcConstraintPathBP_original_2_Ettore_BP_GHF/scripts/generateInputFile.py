@@ -4,12 +4,12 @@ sys.path.append( os.environ['AFQMCLAB_DIR']+"/scripts/supercubic" )
 from setHoping import *
 
 #Model Parameter
-latt_n   = [4,2]
+latt_n   = [4,4]
 ktwist   = [0.0,0.0]
 t1       = 1.0
-U        = 4.0
+U        = 12.0
 mu       = 0.0
-Ntot     = 6
+Ntot     = 14
 UpDnFlag = 0    # 0 up=dn, 1 up=conj(dn) ==> different twist
 
 #Set lattice information
@@ -51,17 +51,17 @@ f.close()
 
 #Method Parameter
 dt                        = 0.01
-thermalSize               = 500
-writeNumber               = 20
+thermalSize               = 300
+writeNumber               = 10
 measureNumberPerWrite     = 2
 measureSkipStep           = 5
-walkerSizePerThread       = 500
-backPropagationStep       = 50
+walkerSizePerThread       = 300
+backPropagationStep       = 100
 decompType                = "densitySpin"  # "densityCharge", "densitySpin", "hopCharge", "hopSpin"
 forceType                 = "dynamicForce"   # "dynamicForce", "constForce"
 forceCap                  = 1.5
 initialPhiTFlag           = "setFromModel"   #"setFromModel", "setRandomly", "readFromFile": phiT.dat
-initialSCPhiTFlag         = "setFromDensity_VMGpBCS_withGHF_orbital"   #"setFromDensity_Analytical", "setFromDensity_VMGpBCS","setFromDensity_VMGpBCS_withGHF_orbital"
+initialSCPhiTFlag         = "setFromDensity_VMGpBCS"   #"setFromDensity_Analytical", "setFromDensity_VMGpBCS","setFromDensity_VMGpBCS_withGHF_orbital"
 scSteps                   = 10  
 initialWalkerFlag         = "setFromModel"   #"setFromModel", "setRandomly", "sampleFromPhiT \\only work for hao's style: still may has some problems","readFromFile","readAllWalkers"
 mgsStep                   = 10

@@ -1,0 +1,5 @@
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3/build/CMakeFiles/rebuild_cache.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3/build/CMakeFiles/afqmcConstraintPath.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3/build/CMakeFiles/test.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3/build/CMakeFiles/rmdat.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3/build/CMakeFiles/edit_cache.dir

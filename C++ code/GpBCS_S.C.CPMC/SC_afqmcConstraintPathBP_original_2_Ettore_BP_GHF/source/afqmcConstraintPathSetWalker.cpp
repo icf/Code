@@ -49,8 +49,6 @@ double VM(VectorXd& v,VectorXd& vgrad)
        vgrad( k  )=(gpBCS_VM.e_v_update(v_change1)-gpBCS_VM.e_v_update(v_change2))/(2.0*step);
     }
 
-    cout<<"v_d: "<<v_d<<endl;
-
     return energy_in_VM;
 }
 
@@ -249,7 +247,7 @@ void AfqmcConstraintPath::initialWalker()
     else if(method.initialWalkerFlag == "sampleFromPhiT")
     {
         if( MPIRank()==0 ){
-           setWalkerFromPhiT(walker[0], phiT, 2*model.getL(), model.getN());   //wee need to correct the way of phase modification
+           setWalkerFromPhiT(walker[0], phiT, 2*model.getL(), model.getN());  
 
            WalkerWalkerOperation walkerWalkerOperation;
            walkerWalkerOperation.set(phiT, walker[0]);  
@@ -321,7 +319,7 @@ void AfqmcConstraintPath::initialSCPhiT()
            TensorHao<complex<double>, 2> tempOrbital(L,L);
            TensorHao<complex<double>, 2> tempAnalytic(L,L);
 
-           tempGreen=observeMeasure.returnGreenMatrix();
+           tempGreen=greenMatrixAfterCPMC;
 
            tempGreen=(tempGreen+conjtrans(tempGreen))/(complex <double> (2,0));
 
@@ -365,7 +363,7 @@ void AfqmcConstraintPath::initialSCPhiT()
            TensorHao<complex<double>, 2> tempOrbital(L,L); 
            TensorHao<complex<double>, 2> tempAnalytic(L,L); 
 
-           tempGreen=observeMeasure.returnGreenMatrix();
+           tempGreen=greenMatrixAfterCPMC;
            
            gpBCS_VM.setModel(&model,method.initialSCPhiTFlag);
            vmpBCS(tempGreen,tempOrbital,tempAnalytic);
@@ -396,7 +394,7 @@ void AfqmcConstraintPath::initialSCPhiT()
            TensorHao<complex<double>, 2> tempOrbital(L,L); 
            TensorHao<complex<double>, 2> tempAnalytic(L,L); 
 
-           tempGreen=observeMeasure.returnGreenMatrix();
+           tempGreen=greenMatrixAfterCPMC;
            
            gpBCS_VM.setModel(&model,method.initialSCPhiTFlag);
            vmpBCS(tempGreen,tempOrbital,tempAnalytic);

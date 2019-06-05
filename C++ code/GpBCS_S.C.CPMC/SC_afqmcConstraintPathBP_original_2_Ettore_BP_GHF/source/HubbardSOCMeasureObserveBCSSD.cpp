@@ -104,11 +104,15 @@ void HubbardSOCMeasureObserveBCSSD::addGreenMatrixBCSBP(BCSSDOperation &bcssdOpe
 
 const TensorHao<complex<double>, 2> HubbardSOCMeasureObserveBCSSD::returnGreenMatrix()
 {
-    //icf: how to get a good enough greenMatrix estimation from greenMatrixNum? need to discuss with Hao!!!!!
+    size_t L2 = getHubbardSOC()->getL() * 2;
+
     TensorHao<complex<double>, 2> greenMatrix;
-    //complex<double> denTot = MPISum(den);
-    complex<double> denTot = den;
-    greenMatrix = greenMatrixNum/denTot;
+    TensorHao<complex<double>, 2> greenMatrixNumTot(L2,L2);
+    MPISum(L2*L2,greenMatrixNum.data(),greenMatrixNumTot.data());
+
+    complex<double> denTot = MPISum(den);
+
+    greenMatrix = greenMatrixNumTot/denTot;
     return greenMatrix;
 }
 

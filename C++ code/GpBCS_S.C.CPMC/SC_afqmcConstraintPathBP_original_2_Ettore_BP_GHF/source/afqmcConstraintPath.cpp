@@ -26,6 +26,11 @@ void AfqmcConstraintPath::run()
 
     for(size_t i=1-1;i<=method.scSteps-1;i++){
        runSC();
+       if(MPIRank() == 0){
+          ostringstream oss;
+          oss << "GreenMatrixICF_step_"<<i+1;
+          greenMatrixAfterCPMC.write(oss.str());
+       }
     }
     prepareStop();
 }
@@ -42,9 +47,6 @@ void AfqmcConstraintPath::runSC()
 
     if( std::abs(method.dt) < 1e-12  ) measureWithoutProjection();
     else measureWithProjection();
-
-    writeMeasurement();
-
 }
 
 void AfqmcConstraintPath::initialParameters()
@@ -64,7 +66,10 @@ void AfqmcConstraintPath::initialParameters()
     expHalfDtK      = model.returnExpMinusAlphaK( -method.dt*0.5 );
 
     expMinusDtV = model.returnExpMinusAlphaV( method.dt, method.decompType );
-    constForce =expMinusDtV.readForce("constForce_param");     //icf: what constForce mean? 4/27/2019
+    constForce =expMinusDtV.readForce("constForce_param");
+
+    //For initial twoBodyAuxBackup and twoBodyAuxBPMeasure
+    twoBodyAux = expMinusDtV.sampleAuxFromForce(constForce);
 
     isBP = false;
     walkerBackup.resize(method.walkerSizePerThread);
@@ -75,6 +80,12 @@ void AfqmcConstraintPath::initialParameters()
     {
         twoBodyAuxBackup[i].resize(method.backPropagationStep);
         twoBodyAuxBPMeasure[i].resize(method.backPropagationStep);
+
+        for(size_t j = 0; j < method.backPropagationStep; ++j)
+        {
+            twoBodyAuxBackup[i][j]=twoBodyAux;
+            twoBodyAuxBPMeasure[i][j]=twoBodyAux;
+        }
     }
     tablePerThreadBackup.resize(method.backPropagationStep);
 }
@@ -128,6 +139,8 @@ void AfqmcConstraintPath::measureWithoutProjection()
     projectExpMinusHalfDtK();
     addMixedMeasurement();
     writeMeasurement();
+    resetAndSaveGreenMatrix();  
+    resetMeasurement();
 }
 
 void AfqmcConstraintPath::measureWithProjection()
@@ -191,8 +204,20 @@ void AfqmcConstraintPath::measureWithProjection()
 
         beta = ( method.thermalSize+(i+0.5)*method.measureNumberPerWrite*method.measureSkipStep-0.5 )*method.dt;
         if (MPIRank() == 0) writeFile( beta, "beta.dat", ios::app);
-        writeMeasurement();
+        writeMeasurement();    
+        resetAndSaveGreenMatrix();  
+        resetMeasurement();
     }
+}
+
+void AfqmcConstraintPath::resetAndSaveGreenMatrix()
+{
+
+     size_t L2=2*model.getL();
+
+     greenMatrixAfterCPMC.resize(L2,L2); greenMatrixAfterCPMC=complex <double> (0.0,0.0);
+     greenMatrixAfterCPMC=observeMeasure.returnGreenMatrix();
+
 }
 
 void AfqmcConstraintPath::prepareStop()
