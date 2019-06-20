@@ -19,7 +19,7 @@ GpBCS_VM gpBCS_VM;  //icf: because of muti-define, we have to do so. Discuss wit
 
 double VM(VectorXd& v,VectorXd& vgrad)
 {
-    double step=0.001;
+    double step=0.0001;
     
     v(0)=0.0; //icf: phase lock
     for(int i=2-1;i<=gpBCS_VM.N_vm-1;i++){
@@ -77,10 +77,10 @@ void vmpBCS(const TensorHao<complex<double>, 2> &tempGreen,TensorHao<complex<dou
     VectorXd vgrad=VectorXd::Zero(gpBCS_VM.N_vm);
 
     LBFGSParam<double> param;
-    param.max_iterations = 30;
-    param.epsilon=0.01;
-    param.delta=0.001;
-    param.past=1;
+    param.max_iterations = 100;     //icf: param used for mixedVM only!!!
+    param.epsilon=0.001; 
+    //param.delta=0.001;
+    //param.past=1;
     
     LBFGSSolver<double> solver(param);
 

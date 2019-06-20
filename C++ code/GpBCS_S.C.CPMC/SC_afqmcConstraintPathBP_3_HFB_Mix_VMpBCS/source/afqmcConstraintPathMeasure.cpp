@@ -136,7 +136,7 @@ void AfqmcConstraintPath::bcsBPMove(size_t i, size_t j, WalkerRight &walker, Ten
             bbackwardTemp(l,k)        = conj(1.0/diag00(l)) * bbackward(l,k); // + 1.0/diag10(l)*bbackward(l+halfL, k);
             bbackwardTemp(l+halfL, k) = conj(1.0/diag11(l)) * bbackward(l+halfL, k); //1.0/diag01(l) * bbackward(l,k) +
         }
-    }bbackwardTemp *= exp(complex <double> (-1.0,0)*twoBodySample.logw);bbackward=bbackwardTemp;
+    }bbackwardTemp *= exp(complex <double> (-1.0,0)*conj(twoBodySample.logw));bbackward=bbackwardTemp;
                
 
     //T/2
@@ -153,8 +153,8 @@ void AfqmcConstraintPath::stabilize(WalkerRight &walker, TensorHao<std::complex<
     TensorHao<std::complex<double>, 2> projf(N,L);
     TensorHao<std::complex<double>, 2> projb(N,L);
 
-    BL_NAME(gmm)(walker.getWf(),bforward,projf,'T');
-    BL_NAME(gmm)(walker.getWf(),bbackward,projb,'T');
+    BL_NAME(gmm)(walker.getWf(),bforward,projf,'C');
+    BL_NAME(gmm)(walker.getWf(),bbackward,projb,'C');
 
     TensorHao<std::complex<double>, 2> dotbTemp(L,L);
     BL_NAME(gmm)(projb,projf,dotbTemp,'C');

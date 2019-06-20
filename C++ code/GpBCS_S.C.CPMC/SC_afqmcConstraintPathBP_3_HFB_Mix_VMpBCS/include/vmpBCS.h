@@ -67,6 +67,7 @@ class GpBCS_VM
    double e_v_update(VectorXcd& v);
 
    void getEnergyFast();
+   void getEnergyFastMixed();
    void getDensityMatrixDiatance();
 
    double get_mixed_energy(VectorXi& mark);

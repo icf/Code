@@ -197,7 +197,7 @@ double GpBCS_VM::e_v_update(VectorXcd& v)
 
    if( initialSCPhiTFlag == "setFromDensity_VMGpBCS"){
       //get energy from GpBCS (<GpBCS|CiCj|GpBCS>/<GpBCS|GpBCS>)
-      getEnergyFast();
+      getEnergyFastMixed();
    }else if( initialSCPhiTFlag == "setFromDensity_VMGpBCS_withGHF_orbital"){
       //get density matrix error from GpBCS (<GpBCS|CiCj|GpBCS>/<GpBCS|GpBCS>)
       getDensityMatrixDiatance();
@@ -299,6 +299,17 @@ void GpBCS_VM::getEnergyFast()
    }
    energy=energy/mark_sum;
 }
+
+void GpBCS_VM::getEnergyFastMixed()
+{
+   VectorXi mark=sample_initial_mark();
+   energy=get_mixed_energy(mark);
+}
+
+//void GpBCS_VM::getEnergyFastHFB()
+//{
+//   energy=get_HFB_energy();     //icf: not sure if <HFB||HFB> follow wick's theory
+//}
 
 void GpBCS_VM::getDensityMatrixDiatance()
 {
