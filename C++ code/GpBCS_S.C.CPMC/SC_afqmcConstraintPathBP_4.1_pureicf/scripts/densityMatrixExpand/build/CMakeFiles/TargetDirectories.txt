@@ -1,0 +1,5 @@
+/mnt/home/zxiao/code/SC_afqmcConstraintPathBP_4.1_pureicf/scripts/densityMatrixExpand/build/CMakeFiles/rebuild_cache.dir
+/mnt/home/zxiao/code/SC_afqmcConstraintPathBP_4.1_pureicf/scripts/densityMatrixExpand/build/CMakeFiles/densityMatrixExpand.dir
+/mnt/home/zxiao/code/SC_afqmcConstraintPathBP_4.1_pureicf/scripts/densityMatrixExpand/build/CMakeFiles/edit_cache.dir
+/mnt/home/zxiao/code/SC_afqmcConstraintPathBP_4.1_pureicf/scripts/densityMatrixExpand/build/CMakeFiles/rmdat.dir
+/mnt/home/zxiao/code/SC_afqmcConstraintPathBP_4.1_pureicf/scripts/densityMatrixExpand/build/CMakeFiles/test.dir

@@ -1,0 +1,5 @@
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3_HFB_Mix_VMpBCS/scripts/densityMatrixToGpBCS/build/CMakeFiles/rebuild_cache.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3_HFB_Mix_VMpBCS/scripts/densityMatrixToGpBCS/build/CMakeFiles/afqmcConstraintPath.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3_HFB_Mix_VMpBCS/scripts/densityMatrixToGpBCS/build/CMakeFiles/test.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3_HFB_Mix_VMpBCS/scripts/densityMatrixToGpBCS/build/CMakeFiles/rmdat.dir
+/home/xiaozhiyu/Desktop/code/code/C++/AFQMC_XIao_from_Hao_code/SC_afqmcConstraintPathBP_3_HFB_Mix_VMpBCS/scripts/densityMatrixToGpBCS/build/CMakeFiles/edit_cache.dir

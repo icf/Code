@@ -6,3 +6,11 @@ New Feature
 
 1) Save All PhiT after each iteration and allow to readPhiT at first. (code can now restart at any iteration step)
 2) Save All GreenMatrix and Errorbar. 
+
+4.0
+1）将一些test输入去除（GHF 轨道）
+2）不再完全支持GpBCS（phiT的构造上我们采用GpBCS下的pBCS）
+
+4.1:
+1) 引入pureicfvm
+
