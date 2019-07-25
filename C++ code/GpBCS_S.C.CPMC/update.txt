@@ -14,3 +14,10 @@ New Feature
 4.1:
 1) 引入pureicfvm
 
+4.2：
+1）将phi=eigen vectors 改成 phi=conj(eigen vectors) in Green matrix (which is correct)
+2)  修改errorbar of green matrix 的计算， 加入/sqrt(N). 现在我们才是正确的 standard error.
+
+4.3：
+1）现在我们可以计算<ninj>了
+
