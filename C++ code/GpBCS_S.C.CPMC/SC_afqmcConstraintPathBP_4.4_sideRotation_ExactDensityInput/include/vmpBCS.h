@@ -1,0 +1,97 @@
+#ifndef VMPBCS
+#define VMPBCS
+
+#define _USE_MATH_DEFINES
+
+#include<iostream>
+#include<fstream>
+
+//#include <complex.h>
+#include <iomanip>
+
+#include <math.h>
+#include<cmath>
+#include <stdlib.h> 
+
+#include <vector> 
+//#include <Eigen/Core>
+//#include <Eigen/Dense>
+//#include <Eigen/Eigenvalues>
+
+#include <algorithm>
+
+#include <unistd.h>
+
+#include<time.h>
+
+#include "../include/eigen/Eigen/Core"
+#include "../include/eigen/Eigen/Dense"
+#include "../include/eigen/Eigen/Eigenvalues"
+#include "../include/eigen/Eigen_uns/MatrixFunctions"
+#include "../include/LBFGSpp-master/include/LBFGS.h"
+#include "../include/afqmcConstraintPath.h"
+#include "afqmclab.h"
+#include "../include/ghf.h"
+
+using namespace tensor_hao;
+using namespace Eigen;
+using namespace LBFGSpp;
+using namespace std;
+
+class GpBCS_VM
+{
+   public: 
+   ofstream outfile_log;
+   clock_t startTime,endTime;
+
+   int Nsite,Ntot,Nspin,N_vm,Tot_sample_num; 
+   double Tot_mark_value;
+
+   MatrixXcd dia,savedDia,T,savedT,M,target_dia; 
+     
+   MatrixXcd target_dm,dm,target_nn,nn;
+   double energy;
+     
+   Model* model;
+   string initialSCPhiTFlag;
+
+   void setModel(Model* model_, string initialSCPhiTFlag_,TensorHao<double, 1> &tempDia); 
+   void set(MatrixXcd& target_dm_, MatrixXcd& eigenvalues, MatrixXcd& eigenvectors, VectorXcd& v);
+   //get sampled SD from GpBCS
+   VectorXi sample_initial_mark(void);
+   double get_mark_value(VectorXi& mark);
+   MatrixXcd get_mark_SD(VectorXi& mark);
+   void sample_update_mark(VectorXi& mark);
+   //get pure energy estimator
+   void updateDia(VectorXcd& v); 
+   double e_v_update(VectorXcd& v);
+
+   void getEnergyFast();
+   void getEnergyFastMixed();
+   void getEnergyFastHFB();
+   void getEnergyFastICF();
+   void getDensityMatrixDiatance();
+
+   double get_mixed_energy(VectorXi& mark);
+   double get_HFB_energy();
+   MatrixXcd get_mixed_dm(VectorXi& mark, double &Energy);
+
+   //tool
+   void get_eiegns(MatrixXcd& cicj_global,MatrixXcd& eigen_values,MatrixXcd& eigen_vectors);
+
+   //stuff to Pure BCS sampling
+   MatrixXcd C_kl,T_up,T_dn,savedT_up,savedT_dn;
+   double abEnergyRealLimit;
+   double get_pure_abEnergy_icf();
+   void get_sampled_C_kl();
+   void update_C_kl(MatrixXcd& C_kl, VectorXi& mark, double mark_value);
+
+   //sideRotationMatrix
+   MatrixXcd sideRotationMatrixMark;
+   MatrixXcd sideRotationMatrix,sideRotationMatrixExp;
+
+
+
+};// end HSystem
+#endif //VMPBCS
+
